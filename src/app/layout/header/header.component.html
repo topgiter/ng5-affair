@@ -1,0 +1,20 @@
+<mat-toolbar class="header-toolbar">
+  <!-- <a [routerLink]=" ['./'] "> -->
+    <img [src]="logoUrl" height="100%" />
+  <!-- </a> -->
+  <span>Global Regulatory Affairs</span>
+  <div class="spacer"></div>
+  <div>
+    <button mat-button class="btn-lang" [matMenuTriggerFor]="menu">
+      <img [src]="langFlag" />
+    </button>
+    <mat-menu class="menu-lang" #menu="matMenu">
+      <button mat-menu-item class="btn-lang" (click)="handleChangeLang('uk')">
+        <img [src]="ukFlag" />
+      </button>
+      <button mat-menu-item class="btn-lang" (click)="handleChangeLang('es')">
+        <img [src]="esFlag" />
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

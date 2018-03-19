@@ -1,0 +1,63 @@
+.inspection-list {
+  .search-placeholder {
+    margin-left: 8px;
+  }
+
+  .search-btn {
+    margin-left: 16px;
+  }
+
+  .registration-btn {
+    margin-left: 16px;
+  }
+}
+
+.inspection-list-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+
+  .mat-table {
+    overflow: auto;
+  }
+  
+  .mat-header-cell {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px;
+
+    &.mat-sort-header-sorted {
+      color: black;
+    }
+  }
+
+  .mat-cell {
+    padding: 4px;
+  }
+
+  .actions {
+    min-width: 175px;
+    text-align: center;
+  }
+
+  .result-icon {
+    height: 25px;
+    width: 25px;
+    background-color: none;
+    border-radius: 50%;
+    margin-left: 24px;
+    margin-right: 16px;
+
+    &.status-1 {
+      background-color: #ff0000;
+    }
+
+    &.status-2 {
+      background-color: #f78f00;
+    }
+
+    &.status-3 {
+      background-color: #33b91c;
+    }
+  }
+}

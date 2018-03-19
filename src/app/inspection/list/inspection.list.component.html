@@ -1,0 +1,129 @@
+<div class="inspection-list">
+  <mat-list role="list">
+    <mat-list-item role="listitem">
+      <div>
+        <mat-icon aria-label="folder">
+          {{showResult ? 'folder_open' : 'search'}}
+        </mat-icon>
+      </div>
+      <div class="search-placeholder">
+          {{showResult ? 'Results of Inspection' : 'Find Inspection'}}
+      </div>
+      <button mat-raised-button class="search-btn" (click)="showResult = !showResult">
+        Search
+        <mat-icon aria-label="search">{{showResult ? 'add' : 'remove'}}</mat-icon>
+      </button>
+      <button mat-raised-button color="warn" class="registration-btn">
+        Inspection Registration
+      </button>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item role="listitem">
+      <button mat-button>
+        <mat-icon aria-label="download">file_download</mat-icon>
+        Export
+      </button>
+    </mat-list-item>
+  </mat-list>
+
+  <div class="inspection-list-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+  
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Inspection Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+      </ng-container>
+  
+      <!-- Geography Column -->
+      <ng-container matColumnDef="geography">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Geography </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.geography}} </mat-cell>
+      </ng-container>
+  
+      <!-- Supervisory Authority Column -->
+      <ng-container matColumnDef="supervisoryAuthority">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Supervisory Authority </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.supervisoryAuthority}} </mat-cell>
+      </ng-container>
+  
+      <!-- Unit/Subsidiary Column -->
+      <ng-container matColumnDef="unitSubsidiary">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Unit / Subsidiary </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.unitSubsidiary}} </mat-cell>
+      </ng-container>
+  
+      <!-- Date of the communication Column -->
+      <ng-container matColumnDef="dateofCommunication">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Date of the communication </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dateofCommunication}} </mat-cell>
+      </ng-container>
+  
+      <!-- Scope Column -->
+      <ng-container matColumnDef="scope">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Scope </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.scope}} </mat-cell>
+      </ng-container>
+  
+      <!-- Risk Type Column -->
+      <ng-container matColumnDef="riskType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Risk Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.riskType}} </mat-cell>
+      </ng-container>
+  
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
+      </ng-container>
+  
+      <!-- Report Date Column -->
+      <ng-container matColumnDef="reportDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Report Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.reportDate}} </mat-cell>
+      </ng-container>
+  
+      <!-- Inspection Result Column -->
+      <ng-container matColumnDef="inspectionResult">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Inspection<br />Result
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div [ngClass]="['result-icon', 'status-' + element.inspectionResult]">
+          </div>
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef class="actions"> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="actions">
+          <div class="action-group">
+            <button mat-icon-button color="primary" title="Details">
+              <mat-icon aria-label="details">find_in_page</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" title="Related Documents">
+              <mat-icon aria-label="Related Documents">assignment</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" title="Inspection Edition">
+              <mat-icon aria-label="Inspection Edition">mode_edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" title="Access to the screen for Associated Findings">
+              <mat-icon aria-label="Access to the screen for Associated Findings">subject</mat-icon>
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+    <mat-paginator #paginator
+      [pageSize]="5"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>
+
