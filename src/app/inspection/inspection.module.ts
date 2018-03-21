@@ -1,21 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routes } from './inspection.routes';
 import { InspectionComponent } from './inspection.component';
 import { InspectionCreateComponent } from './create';
 import { InspectionEditComponent } from './edit';
 import { InspectionListComponent } from './list';
 
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatButton } from '@angular/material';
-import { MatListModule } from '@angular/material/list';
-import { MatDividerModule } from '@angular/material/divider';
+import { InspectionService } from './inspection.service';
+
+// Angular Material Modules
+import {
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatIconModule,
+  MatButtonModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatListModule,
+  MatDividerModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatMenuModule,
+} from '@angular/material';
+
+import { MomentModule } from 'angular2-moment';
+
 /*
       Don't leave side-effects outside of classes so this will tree-shake nicely on prod
       e.g. `console.log('something')` is a side effect.
@@ -29,6 +42,9 @@ import { MatDividerModule } from '@angular/material/divider';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -36,8 +52,18 @@ import { MatDividerModule } from '@angular/material/divider';
     MatButtonModule,
     MatListModule,
     MatDividerModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatMenuModule,
+
+    MomentModule,
+
     RouterModule.forChild(routes),
   ],
+  providers: [InspectionService],
 })
 export class InspectionModule {
   public static routes = routes;

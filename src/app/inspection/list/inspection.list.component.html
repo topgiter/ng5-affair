@@ -28,61 +28,65 @@
 
   <div class="inspection-list-container mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
-  
+
       <!-- Id Column -->
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Inspection Id </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
       </ng-container>
-  
+
       <!-- Geography Column -->
       <ng-container matColumnDef="geography">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Geography </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.geography}} </mat-cell>
       </ng-container>
-  
+
       <!-- Supervisory Authority Column -->
       <ng-container matColumnDef="supervisoryAuthority">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Supervisory Authority </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.supervisoryAuthority}} </mat-cell>
       </ng-container>
-  
+
       <!-- Unit/Subsidiary Column -->
       <ng-container matColumnDef="unitSubsidiary">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Unit / Subsidiary </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.unitSubsidiary}} </mat-cell>
       </ng-container>
-  
+
       <!-- Date of the communication Column -->
-      <ng-container matColumnDef="dateofCommunication">
+      <ng-container matColumnDef="dateOfCommunication">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Date of the communication </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.dateofCommunication}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.dateOfCommunication ? (element.dateOfCommunication | amParse:'YYYY-MM-DD' | amDateFormat: 'DD/MM/YYYY') : '' }}
+        </mat-cell>
       </ng-container>
-  
+
       <!-- Scope Column -->
       <ng-container matColumnDef="scope">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Scope </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.scope}} </mat-cell>
       </ng-container>
-  
+
       <!-- Risk Type Column -->
       <ng-container matColumnDef="riskType">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Risk Type </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.riskType}} </mat-cell>
       </ng-container>
-  
+
       <!-- Status Column -->
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
       </ng-container>
-  
+
       <!-- Report Date Column -->
       <ng-container matColumnDef="reportDate">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Report Date </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.reportDate}} </mat-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.reportDate ? (element.reportDate | amParse:'YYYY-MM-DD' | amDateFormat: 'DD/MM/YYYY') : ''}}
+        </mat-cell>
       </ng-container>
-  
+
       <!-- Inspection Result Column -->
       <ng-container matColumnDef="inspectionResult">
         <mat-header-cell *matHeaderCellDef mat-sort-header>
@@ -93,7 +97,7 @@
           </div>
         </mat-cell>
       </ng-container>
-  
+
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef class="actions"> Actions </mat-header-cell>
@@ -105,20 +109,21 @@
             <button mat-icon-button color="primary" title="Related Documents">
               <mat-icon aria-label="Related Documents">assignment</mat-icon>
             </button>
-            <button mat-icon-button color="primary" title="Inspection Edition">
+            <a [routerLink]=" ['/inspection/edit/' + element.id] "
+               mat-icon-button color="primary">
               <mat-icon aria-label="Inspection Edition">mode_edit</mat-icon>
-            </button>
+            </a>
             <button mat-icon-button color="primary" title="Access to the screen for Associated Findings">
               <mat-icon aria-label="Access to the screen for Associated Findings">subject</mat-icon>
             </button>
           </div>
         </mat-cell>
       </ng-container>
-  
+
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-  
+
     <mat-paginator #paginator
       [pageSize]="5"
       [pageSizeOptions]="[5, 10, 20]"

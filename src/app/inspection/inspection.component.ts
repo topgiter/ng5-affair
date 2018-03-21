@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { InspectionListComponent } from './list/inspection.list.component';
 
 @Component({
   selector: 'inspection-page',
