@@ -1,0 +1,105 @@
+.users-list {
+  .users-list-header {
+    display: flex;
+    padding: 8px 16px;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .search-placeholder {
+    margin-left: 8px;
+  }
+
+  .search-btn {
+    margin-left: 16px;
+  }
+
+  .registration-btn {
+    margin-left: 16px;
+  }
+
+  .users-list-download {
+    padding: 8px 16px;
+  }
+
+  .users-list-search {
+    overflow: hidden;
+  }
+
+  .users-list-filters {
+    padding: 16px 96px;
+    background-color: #FAFAFA;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+
+      .col {
+        flex: 1;
+        padding: 4px 16px;
+      }
+    }
+  }
+}
+
+.users-list-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+
+  .mat-table {
+    overflow: auto;
+  }
+
+  .mat-header-cell {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px;
+
+    &.mat-sort-header-sorted {
+      color: black;
+    }
+  }
+
+  .mat-cell {
+    padding: 4px;
+  }
+
+  .actions {
+    min-width: 175px;
+    text-align: center;
+  }
+
+  .result-icon {
+    height: 25px;
+    width: 25px;
+    background-color: transparent;
+    border-radius: 50%;
+    margin-left: 24px;
+    margin-right: 16px;
+
+    &.status-1 {
+      background-color: #ff0000;
+    }
+
+    &.status-2 {
+      background-color: #f78f00;
+    }
+
+    &.status-3 {
+      background-color: #33b91c;
+    }
+  }
+}
+
+.user-delete-confirm-dialog {
+  .mat-dialog-content {
+    padding: 0 36px;
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

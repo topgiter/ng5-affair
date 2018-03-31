@@ -1,0 +1,33 @@
+.users-edit {
+  padding: 24px;
+
+  .header-section {
+    mat-icon {
+      vertical-align: middle;
+    }
+  }
+
+  .users-edit-container {
+    margin: 48px 96px;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+
+      .col {
+        flex: 1;
+        padding: 16px;
+      }
+    }
+  }
+
+  .users-edit-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 96px;
+
+    button, a {
+      margin-left: 16px;
+    }
+  }
+}

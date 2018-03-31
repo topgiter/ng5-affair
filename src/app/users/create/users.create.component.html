@@ -1,0 +1,74 @@
+<div class="users-create">
+  <div class="header-section">
+    <h2>
+      <mat-icon aria-label="Access to the screen for Associated Findings">create</mat-icon>
+      <span>{{ 'User Registration' | translate }} </span>
+    </h2>
+  </div>
+
+  <div class="users-create-container">
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Name' | translate }}" [(ngModel)]="name"
+                 required [formControl]="nameControl"/>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Surname' | translate }}" [(ngModel)]="surname"
+                 required [formControl]="surnameControl" />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Country' | translate }}" [(value)]="country" required [formControl]="countryControl">
+            <mat-option *ngFor="let item of countryList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="countryControl.hasError('required')">
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Department' | translate }}" [(value)]="group">
+            <mat-option *ngFor="let item of groupList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Entity' | translate }}" [(value)]="entity">
+            <mat-option *ngFor="let item of entityList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Location' | translate }}" [(ngModel)]="location"
+                 required [formControl]="locationControl"/>
+        </mat-form-field>
+      </div>
+      <div class="col"></div>
+      <div class="col"></div>
+    </div>
+
+  </div>
+
+  <div class="users-create-actions">
+    <button mat-raised-button (click)="clearUser()">{{ 'Clear' | translate }}</button>
+    <a [routerLink]=" ['/users/list'] "
+       mat-raised-button>{{ 'Cancel' | translate }}</a>
+    <button mat-raised-button color="primary" (click)="createUser()">Save</button>
+  </div>
+</div>

@@ -1,1 +1,121 @@
-<h2>inspection.create</h2>
+<div class="inspection-create">
+  <div class="header-section">
+    <h2>
+      <mat-icon aria-label="Access to the screen for Associated Findings">create</mat-icon>
+      <span>{{ 'Inspection Registration' | translate}}</span>
+    </h2>
+  </div>
+
+  <div class="inspection-create-container">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Supervisory Authority' | translate }}" [(value)]="supervisoryAuthority">
+            <mat-option *ngFor="let item of supervisoryAuthorityList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Unit/Subsidiary' | translate }}" [(value)]="unitSubsidiary">
+            <mat-option *ngFor="let item of unitSubsidiaryList" [value]="item">
+              {{ item.entityName | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Cargabal Code' | translate }}" disabled [value]="unitSubsidiary ? unitSubsidiary.cargabalCode : ''"/>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Scope' | translate }}" [(ngModel)]="scope" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="communicationDatePicker" placeholder="{{ 'Date of the communication' | translate }}" [formControl]="dateOfCommunication">
+          <mat-datepicker-toggle matSuffix [for]="communicationDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #communicationDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Risk Type' | translate }}" [(value)]="riskType">
+            <mat-option *ngFor="let item of riskTypeList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Primary Risk Subtype' | translate }}" [(value)]="subtypeRisk">
+            <mat-option *ngFor="let item of subtypeRiskList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="startingDatePicker" placeholder="{{ 'Starting Date' | translate }}" [formControl]="startingDate">
+          <mat-datepicker-toggle matSuffix [for]="startingDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #startingDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="expectedEndDatePicker" placeholder="{{ 'Expected End Date' | translate }}" [formControl]="expectedEndDate">
+          <mat-datepicker-toggle matSuffix [for]="expectedEndDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #expectedEndDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Category' | translate }}" [(value)]="category">
+            <mat-option *ngFor="let category of categoryList" [value]="category">
+              {{ category | translate}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col"></div>
+      <div class="col"></div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="{{ 'Comments' | translate }}" [(ngModel)]="comments"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="inspection-create-actions">
+    <button mat-raised-button (click)="clearInspection()">{{ 'Clear' | translate }}</button>
+    <a [routerLink]=" ['/inspection/list'] "
+       mat-raised-button>{{ 'Cancel' | translate }}</a>
+    <button mat-raised-button color="primary" (click)="createInspection()">{{ 'Save' | translate }}</button>
+  </div>
+</div>
+

@@ -1,0 +1,79 @@
+<div class="users-edit">
+  <div class="header-section">
+    <h2>
+      <mat-icon aria-label="Access to the screen for Associated Findings">create</mat-icon>
+      <span>{{ 'User Edit' | translate }} </span>
+    </h2>
+  </div>
+
+  <div class="users-edit-container">
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Employee Id' | translate }}" [(ngModel)]="userId" disabled />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Name' | translate }}" [(ngModel)]="name"
+                 required [formControl]="nameControl"/>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Country' | translate }}" [(value)]="country" required [formControl]="countryControl">
+            <mat-option *ngFor="let item of countryList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="countryControl.hasError('required')">
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Group' | translate }}" [(value)]="group">
+            <mat-option *ngFor="let item of groupList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Profile' | translate }}" [(value)]="profile">
+            <mat-option *ngFor="let item of profileList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Contact' | translate }}" [(value)]="contact">
+            <mat-option [value]="true">
+              {{ 'Yes' | translate }}
+            </mat-option>
+            <mat-option [value]="false">
+              {{ 'No' | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col"></div>
+      <div class="col"></div>
+    </div>
+
+  </div>
+
+  <div class="users-edit-actions">
+    <button mat-raised-button (click)="clearUser()">{{ 'Clear' | translate }}</button>
+    <a [routerLink]=" ['/users/list'] "
+       mat-raised-button>{{ 'Cancel' | translate }}</a>
+    <button mat-raised-button color="primary" (click)="updateUser()">Save</button>
+  </div>
+</div>

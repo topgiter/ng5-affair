@@ -1,0 +1,19 @@
+.inspection-related-dialog {
+  .mat-dialog-content {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .download {
+    margin-bottom: 8px;
+  }
+
+  .panel-content {
+    //text-align: center;
+  }
+}

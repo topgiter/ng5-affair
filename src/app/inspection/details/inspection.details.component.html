@@ -1,0 +1,144 @@
+<div class="inspection-details">
+  <div class="header-section">
+    <h2>
+      <mat-icon aria-label="Access to the screen for Associated Findings">find_in_page</mat-icon>
+      <span>{{ 'Inspection Details' | translate }}</span>
+    </h2>
+  </div>
+
+  <div class="inspection-details-container">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Inspection Id' | translate }}" disabled [(ngModel)]="inspectionId" />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Geography' | translate }}" disabled [(ngModel)]="geography" />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Status' | translate }}}" disabled [(ngModel)]="status" />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Unit/Subsidiary' | translate }}" disabled [(ngModel)]="unitSubsidiary" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Cargabal Code' | translate }}" disabled [(ngModel)]="categoryCode" />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Date of communication' | translate }}" disabled [(ngModel)]="dateOfCommunication" />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Risk Type' | translate }}" disabled [(ngModel)]="riskType" />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Owner' | translate }}" disabled [(ngModel)]="owner" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Primary Risk Subtype' | translate }}" disabled />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Starting Date' | translate }}" disabled [(ngModel)]="startingDate">
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Expected End Date' | translate }}" disabled [(ngModel)]="expectedEndDate">
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Report Date' | translate }}" disabled [(ngModel)]="reportDate">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <span class="inspection-result-label">
+          <label>{{ 'Inspection Result' | translate }}</label>
+        </span>
+        <div>
+          <span *ngIf="!inspectionResult" class="label-disabled" >{{ 'N/A' | translate }}</span>
+          <div *ngIf="inspectionResult" [ngClass]="['result-icon', 'status-' + inspectionResult]"></div>
+        </div>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Degree of Implementation' | translate }}" disabled [(ngModel)]="degree" />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Degree of Progress' | translate }}" disabled [(ngModel)]="degreeOfProcess" />
+        </mat-form-field>
+      </div>
+
+      <div class="col"></div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Supervisory Authority' | translate }}" disabled [(ngModel)]="supervisoryAuthority" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Scope' | translate }}" disabled [(ngModel)]="scope" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="{{ 'Comments' | translate }}" disabled [(ngModel)]="comments"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="inspection-details-actions">
+    <a [routerLink]=" ['/inspection/list'] "
+       mat-raised-button color="primary">{{ 'Back' | translate }}</a>
+  </div>
+</div>
+

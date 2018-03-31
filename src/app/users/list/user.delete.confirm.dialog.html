@@ -1,0 +1,13 @@
+<div class="user-delete-confirm-dialog">
+  <h1 mat-dialog-title> {{ 'Delete User' | translate }}</h1>
+  <div mat-dialog-content>
+    <h3>{{ 'Are you sure to delete this user?' | translate }}</h3>
+    <p>{{ 'Id' | translate }}: <b>{{ data.user.id }}</b></p>
+    <p>{{ 'Identifier' | translate }}: <b>{{ data.user.identifier }}</b></p>
+    <p>{{ 'Name' | translate }}: <b>{{ data.user.name }}</b></p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="close(false)" cdkFocusInitial> {{ 'No' | translate }} </button>
+    <button mat-raised-button color="primary" (click)="close(true)"> {{ 'Yes' | translate }} </button>
+  </div>
+</div>

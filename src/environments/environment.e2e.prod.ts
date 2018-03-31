@@ -9,6 +9,7 @@ enableProdMode();
 
 export const environment: Environment = {
   production: true,
+  apiUrl: 'https://example.prod.e2e.com/api',
   showDevModule: true,
 
   /** Angular debug tools in the dev console

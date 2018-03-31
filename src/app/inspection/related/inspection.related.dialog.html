@@ -1,0 +1,37 @@
+<div class="inspection-related-dialog">
+  <h1 mat-dialog-title>{{ 'Inspection' | translate }} {{data.inspection.id}}</h1>
+  <div mat-dialog-content>
+    <div class="download">
+      <button mat-button (click)="downloadDocuments()">
+        <mat-icon aria-label="download">file_download</mat-icon>
+        {{ 'Export' | translate }}
+      </button>
+    </div>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let doc of documents">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ doc.docManagName }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{ doc.description }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="panel-content">
+          <div>{{ 'SubCategory' | translate }}: <b>{{ doc.subCategory }}</b></div>
+          <div>{{ 'From' | translate }}: <b>{{ doc.from }}</b></div>
+          <div>{{ 'Owner' | translate }}: <b>{{ doc.owner }}</b></div>
+          <div>{{ 'Geography' | translate }}: <b>{{ doc.geography }}</b></div>
+          <div>{{ 'Entity' | translate }}: <b>{{ doc.entity }}</b></div>
+          <div>{{ 'DocDate' | translate }}: <b>{{ doc.docDate | amDateFormat: 'DD/MM/YYYY' }}</b></div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="close()" cdkFocusInitial>{{ 'Close' | translate }}</button>
+  </div>
+</div>

@@ -4,11 +4,11 @@
     Index
   </a> -->
   <a [routerLink]=" ['./inspection'] "
-    mat-button routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    Inspection
+    mat-button routerLinkActive="active">
+    {{ 'inspection' | translate }}
   </a>
-  <a [routerLink]=" ['./administration'] "
-    mat-button routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    Administration
+  <a [routerLink]=" ['./users'] "
+    mat-button routerLinkActive="active">
+    {{ 'administration' | translate }}
   </a>
 </nav>

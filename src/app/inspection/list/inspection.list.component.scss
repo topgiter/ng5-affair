@@ -1,4 +1,11 @@
 .inspection-list {
+  .inspection-list-header {
+    display: flex;
+    padding: 8px 16px;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
   .search-placeholder {
     margin-left: 8px;
   }
@@ -9,6 +16,30 @@
 
   .registration-btn {
     margin-left: 16px;
+  }
+
+  .inspection-list-download {
+    padding: 8px 16px;
+  }
+
+  .inspection-list-search {
+    overflow: hidden;
+  }
+
+  .inspection-list-filters {
+    padding: 16px 96px;
+    background-color: #FAFAFA;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+
+      .col {
+        flex: 1;
+        padding: 4px 16px;
+      }
+    }
   }
 }
 

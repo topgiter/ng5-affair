@@ -1,0 +1,104 @@
+<div class="users-list">
+  <div class="users-list-header">
+    <div>
+      <mat-icon aria-label="folder">
+        {{showResult ? 'folder_open' : 'search'}}
+      </mat-icon>
+    </div>
+    <div class="search-placeholder">
+      {{ (showResult ? 'Users Results' : 'Users Search') | translate }}
+    </div>
+    <button mat-raised-button class="search-btn" (click)="toggleSearch()">
+      {{ 'Search' | translate }}
+      <mat-icon aria-label="search">{{showResult ? 'add' : 'remove'}}</mat-icon>
+    </button>
+    <a [routerLink]=" ['/users/create'] "
+       mat-raised-button color="warn" class="registration-btn">
+      {{ 'User Registration' | translate }}
+    </a>
+  </div>
+
+  <div class="users-list-download">
+    <button mat-button (click)="downloadUsers()">
+      <mat-icon aria-label="download">file_download</mat-icon>
+      {{ 'Export' | translate }}
+    </button>
+  </div>
+
+
+  <div class="users-list-container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Id' | translate}}  </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+      </ng-container>
+
+      <!-- Identifier Column -->
+      <ng-container matColumnDef="identifier">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Identifier' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.identifier }} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Name' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+      </ng-container>
+
+      <!-- Country Column -->
+      <ng-container matColumnDef="country">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Country' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.country }} </mat-cell>
+      </ng-container>
+
+      <!-- Group Column -->
+      <ng-container matColumnDef="group">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Group' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.group }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Profile Column -->
+      <ng-container matColumnDef="profile">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Profile' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.profile }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef class="actions"> {{ 'Actions' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="actions">
+          <div class="action-group">
+            <span matTooltip="{{ 'Edit' | translate }}" [matTooltipPosition]="'above'">
+              <a [routerLink]=" ['/users/edit/' + element.id] "
+                 mat-icon-button color="primary">
+                <mat-icon aria-label="details">mode_edit</mat-icon>
+              </a>
+            </span>
+            <span matTooltip="{{ 'Delete' | translate }}" [matTooltipPosition]="'above'">
+              <button mat-icon-button color="primary" >
+                <mat-icon aria-label="Related Documents"
+                          (click)="deleteUser(element)">delete</mat-icon>
+              </button>
+            </span>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator
+                   [pageSize]="5"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>
+

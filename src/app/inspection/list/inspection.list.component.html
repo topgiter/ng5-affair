@@ -1,61 +1,154 @@
 <div class="inspection-list">
-  <mat-list role="list">
-    <mat-list-item role="listitem">
-      <div>
-        <mat-icon aria-label="folder">
-          {{showResult ? 'folder_open' : 'search'}}
-        </mat-icon>
+  <div class="inspection-list-header">
+    <div>
+      <mat-icon aria-label="folder">
+        {{showResult ? 'folder_open' : 'search'}}
+      </mat-icon>
+    </div>
+    <div class="search-placeholder">
+      {{ (showResult ? 'Results of Inspection' : 'Search for Inspection') | translate }}
+    </div>
+    <button mat-raised-button class="search-btn" (click)="toggleSearch()">
+      {{ 'Search' | translate }}
+      <mat-icon aria-label="search">{{showResult ? 'add' : 'remove'}}</mat-icon>
+    </button>
+    <a [routerLink]=" ['/inspection/create'] "
+       mat-raised-button color="warn" class="registration-btn">
+      {{ 'Inspection Registration' | translate }}
+    </a>
+  </div>
+
+  <div class="inspection-list-filters" *ngIf="!showResult">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Inspection Id' | translate }}" [(ngModel)]="inspectionId" />
+        </mat-form-field>
       </div>
-      <div class="search-placeholder">
-          {{showResult ? 'Results of Inspection' : 'Find Inspection'}}
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Supervisory Authority' | translate }}" [(value)]="supervisoryAuthority">
+            <mat-option *ngFor="let item of supervisoryAuthorityList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
-      <button mat-raised-button class="search-btn" (click)="showResult = !showResult">
-        Search
-        <mat-icon aria-label="search">{{showResult ? 'add' : 'remove'}}</mat-icon>
-      </button>
-      <button mat-raised-button color="warn" class="registration-btn">
-        Inspection Registration
-      </button>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item role="listitem">
-      <button mat-button>
-        <mat-icon aria-label="download">file_download</mat-icon>
-        Export
-      </button>
-    </mat-list-item>
-  </mat-list>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Unit/Subsidiary' | translate }}" [(value)]="unitSubsidiary">
+            <mat-option *ngFor="let item of unitSubsidiaryList" [value]="item">
+              {{ item.entityName | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Cargabal Code' | translate }}" disabled [value]="unitSubsidiary ? unitSubsidiary.cargabalCode : ''"/>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="communicationDatePicker" placeholder="{{ 'Date of the communication' | translate }}" [formControl]="dateOfCommunication">
+          <mat-datepicker-toggle matSuffix [for]="communicationDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #communicationDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Scope' | translate }}" [(ngModel)]="scope" />
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Risk Type' | translate }}" [(value)]="riskType">
+            <mat-option *ngFor="let item of riskTypeList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Primary Risk Subtype' | translate }}" [(value)]="subtypeRisk">
+            <mat-option *ngFor="let item of subtypeRiskList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Geography' | translate }}" [(value)]="geography">
+            <mat-option *ngFor="let item of geographyList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Status' | translate }}" [(value)]="status">
+            <mat-option *ngFor="let statusItem of statusList" [value]="statusItem">
+              {{ statusItem | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col text-align-center">
+        <button mat-raised-button color="primary" (click)="toggleSearch()">{{ 'Search' | translate }}</button>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+
+  <div class="inspection-list-download">
+    <button mat-button (click)="downloadInspections()">
+      <mat-icon aria-label="download">file_download</mat-icon>
+      {{ 'Export' | translate }}
+    </button>
+  </div>
+
 
   <div class="inspection-list-container mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
 
       <!-- Id Column -->
       <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Inspection Id </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Inspection Id' | translate}}  </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
       </ng-container>
 
       <!-- Geography Column -->
       <ng-container matColumnDef="geography">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Geography </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Geography' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.geography}} </mat-cell>
       </ng-container>
 
       <!-- Supervisory Authority Column -->
       <ng-container matColumnDef="supervisoryAuthority">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Supervisory Authority </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Supervisory Authority' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.supervisoryAuthority}} </mat-cell>
       </ng-container>
 
       <!-- Unit/Subsidiary Column -->
       <ng-container matColumnDef="unitSubsidiary">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Unit / Subsidiary </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Unit / Subsidiary' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.unitSubsidiary}} </mat-cell>
       </ng-container>
 
       <!-- Date of the communication Column -->
       <ng-container matColumnDef="dateOfCommunication">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Date of the communication </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Date of the comunication' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.dateOfCommunication ? (element.dateOfCommunication | amParse:'YYYY-MM-DD' | amDateFormat: 'DD/MM/YYYY') : '' }}
         </mat-cell>
@@ -63,25 +156,25 @@
 
       <!-- Scope Column -->
       <ng-container matColumnDef="scope">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Scope </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Scope' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.scope}} </mat-cell>
       </ng-container>
 
       <!-- Risk Type Column -->
       <ng-container matColumnDef="riskType">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Risk Type </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Risk Type' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.riskType}} </mat-cell>
       </ng-container>
 
       <!-- Status Column -->
       <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Status' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
       </ng-container>
 
       <!-- Report Date Column -->
       <ng-container matColumnDef="reportDate">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Report Date </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Report Date' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.reportDate ? (element.reportDate | amParse:'YYYY-MM-DD' | amDateFormat: 'DD/MM/YYYY') : ''}}
         </mat-cell>
@@ -90,7 +183,7 @@
       <!-- Inspection Result Column -->
       <ng-container matColumnDef="inspectionResult">
         <mat-header-cell *matHeaderCellDef mat-sort-header>
-          Inspection<br />Result
+          {{ 'Inspection Result' | translate }}
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
           <div [ngClass]="['result-icon', 'status-' + element.inspectionResult]">
@@ -100,22 +193,33 @@
 
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef class="actions"> Actions </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef class="actions"> {{ 'Actions' | translate }} </mat-header-cell>
         <mat-cell *matCellDef="let element" class="actions">
           <div class="action-group">
-            <button mat-icon-button color="primary" title="Details">
-              <mat-icon aria-label="details">find_in_page</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" title="Related Documents">
-              <mat-icon aria-label="Related Documents">assignment</mat-icon>
-            </button>
-            <a [routerLink]=" ['/inspection/edit/' + element.id] "
-               mat-icon-button color="primary">
-              <mat-icon aria-label="Inspection Edition">mode_edit</mat-icon>
-            </a>
-            <button mat-icon-button color="primary" title="Access to the screen for Associated Findings">
-              <mat-icon aria-label="Access to the screen for Associated Findings">subject</mat-icon>
-            </button>
+            <span matTooltip="{{ 'Details' | translate }}" [matTooltipPosition]="'above'">
+              <a [routerLink]=" ['/inspection/details/' + element.id] "
+                 mat-icon-button color="primary">
+                <mat-icon aria-label="details">find_in_page</mat-icon>
+              </a>
+            </span>
+            <span matTooltip="{{ 'Related Documents' | translate }}" [matTooltipPosition]="'above'">
+              <button mat-icon-button color="primary" >
+                <mat-icon aria-label="Related Documents"
+                  (click)="openRelatedDocumentDialog(element)">assignment</mat-icon>
+              </button>
+            </span>
+            <span matTooltip="{{ 'Inspection Edition' | translate }}" [matTooltipPosition]="'above'">
+              <a [routerLink]=" ['/inspection/edit/' + element.id] "
+                 mat-icon-button color="primary">
+                <mat-icon aria-label="Inspection Edition">mode_edit</mat-icon>
+              </a>
+            </span>
+            <span matTooltip="{{ 'Access to the screen of Associated Findings' | translate }}" [matTooltipPosition]="'above'">
+              <a [routerLink]=" ['/finding'] "
+                mat-icon-button color="primary">
+                <mat-icon aria-label="Access to the screen for Associated Findings">subject</mat-icon>
+              </a>
+            </span>
           </div>
         </mat-cell>
       </ng-container>

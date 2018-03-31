@@ -2,7 +2,7 @@
   <div class="header-section">
     <h2>
       <mat-icon aria-label="Access to the screen for Associated Findings">create</mat-icon>
-      <span>Inspection Edition</span>
+      <span>{{ 'Inspection Edition' | translate }}</span>
     </h2>
   </div>
 
@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
-          <input matInput [matDatepicker]="startingDatePicker" placeholder="Starting Date" [formControl]="startingDate">
+          <input matInput [matDatepicker]="startingDatePicker" placeholder="{{ 'Starting Date' | translate }}" [formControl]="startingDate">
           <mat-datepicker-toggle matSuffix [for]="startingDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #startingDatePicker></mat-datepicker>
         </mat-form-field>
@@ -18,7 +18,7 @@
 
       <div class="col">
         <mat-form-field class="full-width">
-          <input matInput [matDatepicker]="expectedEndDatePicker" placeholder="Expected End Date" [formControl]="expectedEndDate">
+          <input matInput [matDatepicker]="expectedEndDatePicker" placeholder="{{ 'Expected End Date' | translate }}" [formControl]="expectedEndDate">
           <mat-datepicker-toggle matSuffix [for]="expectedEndDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #expectedEndDatePicker></mat-datepicker>
         </mat-form-field>
@@ -26,9 +26,9 @@
 
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-select placeholder="Status" [(value)]="status">
+          <mat-select placeholder="{{ 'Status' | translate }}" [(value)]="status">
             <mat-option *ngFor="let statusItem of statusList" [value]="statusItem">
-              {{ statusItem }}
+              {{ statusItem | translate }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -36,7 +36,7 @@
 
       <div class="col">
         <mat-form-field class="full-width">
-          <input matInput [matDatepicker]="reportDatePicker" placeholder="Report Date" [formControl]="reportDate">
+          <input matInput [matDatepicker]="reportDatePicker" placeholder="{{ 'Report Date' | translate }}" [formControl]="reportDate">
           <mat-datepicker-toggle matSuffix [for]="reportDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #reportDatePicker></mat-datepicker>
         </mat-form-field>
@@ -45,10 +45,10 @@
     <div class="row">
       <div class="col">
         <span class="inspection-result-label">
-          <label>Inspection Result</label>
+          <label>{{ 'Inspection Result' | translate }}</label>
         </span>
         <button mat-button [matMenuTriggerFor]="menu">
-          <span *ngIf="!inspectionResult">N/A</span>
+          <span *ngIf="!inspectionResult">{{ 'N/A' | translate }}</span>
           <div *ngIf="inspectionResult" [ngClass]="['result-icon', 'status-' + inspectionResult]"></div>
         </button>
         <mat-menu #menu="matMenu">
@@ -60,15 +60,15 @@
 
       <div class="col">
         <mat-form-field class="full-width">
-          <input matInput placeholder="Degree of Implementation" type="number" [(ngModel)]="degree"/>
+          <input matInput placeholder="{{ 'Degree of Implementation' | translate }}" type="number" [(ngModel)]="degree"/>
         </mat-form-field>
       </div>
 
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-select placeholder="Degree of Progress" [(value)]="degreeOfProcess">
+          <mat-select placeholder="{{ 'Degree of Progress' | translate }}" [(value)]="degreeOfProcess">
             <mat-option *ngFor="let progress of progressList" [value]="progress">
-              {{ progress }}
+              {{ progress | translate }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -76,9 +76,9 @@
 
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-select placeholder="Owner" [(value)]="owner">
+          <mat-select placeholder="{{ 'Owner' | translate }}" [(value)]="owner">
             <mat-option *ngFor="let owner of ownerList" [value]="owner">
-              {{ owner }}
+              {{ owner | translate }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -88,9 +88,9 @@
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-select placeholder="Finding" [(value)]="finding">
+          <mat-select placeholder="{{ 'Finding' | translate }}" [(value)]="finding">
             <mat-option *ngFor="let finding of [true, false]" [value]="finding">
-              {{ finding ? 'Yes' : 'No' }}
+              {{ (finding ? 'Yes' : 'No') | translate }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -98,9 +98,9 @@
 
       <div class="col">
         <mat-form-field class="full-width">
-          <mat-select placeholder="Category" [(value)]="category">
+          <mat-select placeholder="{{ 'Category' | translate }}" [(value)]="category">
             <mat-option *ngFor="let category of categoryList" [value]="category">
-              {{ category }}
+              {{ category | translate }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -113,17 +113,17 @@
     <div class="row">
       <div class="col">
         <mat-form-field class="full-width">
-          <textarea matInput placeholder="Comments" [(ngModel)]="comments"></textarea>
+          <textarea matInput placeholder="{{ 'Comments' | translate }}" [(ngModel)]="comments"></textarea>
         </mat-form-field>
       </div>
     </div>
   </div>
 
   <div class="inspection-edit-actions">
-    <button mat-raised-button (click)="clearInspection()">Clear</button>
+    <button mat-raised-button (click)="clearInspection()">{{ 'Clear' | translate }}</button>
     <a [routerLink]=" ['/inspection/list'] "
-      mat-raised-button>Cancel</a>
-    <button mat-raised-button color="primary" (click)="updateInspection()">Save</button>
+      mat-raised-button>{{ 'Cancel' | translate }}</a>
+    <button mat-raised-button color="primary" (click)="updateInspection()">{{ 'Save' | translate }}</button>
   </div>
 </div>
 

@@ -98,6 +98,7 @@
     "@angular/platform-server": "^5.2.7",
     "@angular/router": "^5.2.7",
     "angular2-moment": "^1.8.0",
+    "angular5-csv": "^0.2.8",
     "core-js": "^2.4.1",
     "http-server": "^0.11.1",
     "ie-shim": "^0.1.0",

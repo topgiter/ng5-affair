@@ -1,4 +1,153 @@
 {
+  "users": [
+    {
+      "name": "Application BankTrade",
+      "contry": "ESPAÑA",
+      "profile": "Risks",
+      "contact": true,
+      "id": 1,
+      "country": "Germany",
+      "department": "Tax Advice",
+      "group": "Tax Advice"
+    },
+    {
+      "id": 2,
+      "identifier": "VOL_RES_VOL",
+      "name": "Aplicacion BankTrade",
+      "country": "ANGOLA",
+      "group": "BANESTO",
+      "profile": "Riesgos + General"
+    },
+    {
+      "id": 3,
+      "identifier": "VOL_ADMIN_RA",
+      "name": "Aplicacion BankTrade",
+      "country": "DINAMARCA",
+      "group": "CUMPLIMIENTO - CONSULTA",
+      "profile": "Riesgos"
+    },
+    {
+      "id": 4,
+      "identifier": "VOL_ADMIN_VOL",
+      "name": "wer2342342",
+      "country": "Spain",
+      "group": null,
+      "profile": null,
+      "contact": null
+    },
+    {
+      "id": 6,
+      "identifier": "XI310407",
+      "name": "Aplicacion BankTrade",
+      "country": "ANGOLA",
+      "group": "REGISTRO DE SOCIEDADES Y PARTICIPACIONES",
+      "profile": "Confidencial"
+    },
+    {
+      "id": 7,
+      "identifier": "VOL_ADMIN_LOP",
+      "name": "Aplicacion BankTrade",
+      "country": "",
+      "group": "BANESTO",
+      "profile": "Consulta"
+    },
+    {
+      "id": 8,
+      "identifier": "n59155",
+      "name": "Aplicacion BankTrade",
+      "country": "CANADÁ",
+      "group": "VOLCKER",
+      "profile": "Administrador"
+    },
+    {
+      "id": 9,
+      "identifier": "n91173",
+      "name": "Aplicacion BankTrade",
+      "country": "FINLANDIA",
+      "group": "REGISTRO DE SOCIEDADES Y PARTICIPACIONES",
+      "profile": "General"
+    },
+    {
+      "id": 10,
+      "identifier": "E12334",
+      "name": "Barack Obama",
+      "country": "CANADÁ",
+      "group": "CUMPLIMIENTO - CONSULTA",
+      "profile": "Consulta"
+    },
+    {
+      "id": 11,
+      "identifier": "XI303493",
+      "name": "Bruno Marques",
+      "country": "PORTUGAL",
+      "group": "AUDITORIA - CONSULTA",
+      "profile": "Administrador"
+    },
+    {
+      "id": 12,
+      "identifier": "ABC123",
+      "name": "Donald Trump",
+      "country": "ESTADOS UNIDOS",
+      "group": "REGISTRO DE SOCIEDADES Y PARTICIPACIONES",
+      "profile": "Administrador"
+    },
+    {
+      "id": 13,
+      "identifier": "XI4567",
+      "name": "George Bush",
+      "country": "ESTADOS UNIDOS",
+      "group": "DESARROLLO CORPORATIVO",
+      "profile": "Consulta"
+    },
+    {
+      "id": 14,
+      "identifier": "n83128",
+      "name": "Javier Mozos",
+      "country": "ESPAÑA",
+      "group": "REGISTRO DE SOCIEDADES Y PARTICIPACIONES",
+      "profile": "Administrador"
+    },
+    {
+      "id": 15,
+      "identifier": "XI320166",
+      "name": "Joana Cardoso",
+      "country": "PORTUGAL",
+      "group": "REGISTRO DE SOCIEDADES Y PARTICIPACIONES",
+      "profile": "General"
+    },
+    {
+      "id": 16,
+      "identifier": "XI5555",
+      "name": "João Matias",
+      "country": "REPÚBLICA CHECA",
+      "group": "ARGENTINA",
+      "profile": "Confidencial"
+    },
+    {
+      "id": 17,
+      "identifier": "n33525",
+      "name": "Maria De Los Angeles Trucios Garcia",
+      "country": "ESPAÑA",
+      "group": "REGISTRO DE SOCIEDADES Y PARTICIPACIONES",
+      "profile": "Administrador"
+    },
+    {
+      "id": 18,
+      "identifier": "XI302333",
+      "name": "Miguel Alexandre",
+      "country": "PORTUGAL",
+      "group": "REGISTRO DE SOCIEDADES Y PARTICIPACIONES",
+      "profile": "Administrador"
+    },
+    {
+      "id": 19,
+      "identifier": "XI327049",
+      "name": "Tiago Coito",
+      "country": "PORTUGAL",
+      "group": "REGISTRO DE SOCIEDADES Y PARTICIPACIONES",
+      "profile": "Fondos"
+    }
+  ],
   "inspections": [
     {
       "id": "INS0000001",
@@ -9,29 +158,23 @@
       "scope": "Avaliaçao do Consignado - Parcela em Trânsito(Olé)",
       "riskType": "Compliance and regulatory risk",
       "status": "Upcoming",
-      "reportDate": "2016-05-11",
+      "reportDate": "2016-05-22",
       "inspectionResult": "1",
-      "degree": null,
-      "expectedEndDate": null
+      "degree": null
     },
     {
       "id": "INS0000002",
       "geography": "BRASIL",
       "supervisoryAuthority": "Eurozone - Banco Central Europeo(BCE)",
       "unitSubsidiary": "Brasil-Banco Brasil S.A.",
-      "dateOfCommunication": null,
+      "dateOfCommunication": "2016-05-22",
       "scope": "Avaliação do BCE no Portifólio de Crédito.",
       "riskType": "Risco de Crédito",
-      "status": null,
-      "reportDate": null,
+      "status": "Closed",
+      "reportDate": "2017-06-25",
       "inspectionResult": null,
-      "degreeOfProcess": null,
-      "category": null,
-      "comments": null,
-      "expectedEndDate": null,
-      "degree": null,
-      "owner": null,
-      "finding": null
+      "startingDate": null,
+      "expectedEndDate": null
     },
     {
       "id": "INS0000003",
@@ -44,11 +187,7 @@
       "status": "Closed",
       "reportDate": "2016-04-22",
       "inspectionResult": "2",
-      "degree": 5,
-      "degreeOfProcess": "Intermediate",
-      "owner": "Owner3",
-      "category": "Thematic review",
-      "comments": "Ah ha",
+      "startingDate": null,
       "expectedEndDate": null
     },
     {
@@ -74,6 +213,8 @@
       "status": "Closed",
       "reportDate": "2016-12-21",
       "inspectionResult": "3",
+      "category": "IMI",
+      "startingDate": null,
       "expectedEndDate": null
     },
     {
@@ -98,11 +239,7 @@
       "riskType": "Compliance and regulatory risk",
       "status": "Upcoming",
       "reportDate": "2016-05-22",
-      "inspectionResult": "2",
-      "degreeOfProcess": "Inadequate",
-      "finding": false,
-      "category": "Thematic review",
-      "expectedEndDate": "2018-03-30"
+      "inspectionResult": "1"
     },
     {
       "id": "INS0000008",
@@ -200,5 +337,435 @@
       "reportDate": "2017-02-04",
       "inspectionResult": "1"
     }
-  ]
+  ],
+  "documents": [
+    {
+      "id": 1,
+      "docManagName": "DocPRUEBA -- 1",
+      "subCategory": "SUBcategoriaPrueba",
+      "from": "./",
+      "owner": "OWNERPRUEBA",
+      "geography": "ESP",
+      "entity": "PRUEBAENTITY",
+      "docDate": "2009-05-09T22:00:00.000+0000",
+      "description": "PRUEBA -- 1",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/documents/2"
+        },
+        "document": {
+          "href": "http://localhost:8080/documents/2"
+        },
+        "documentCategory": {
+          "href": "http://localhost:8080/documents/2/documentCategory"
+        },
+        "inspectionsInDocument": {
+          "href": "http://localhost:8080/documents/2/inspectionsInDocument"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "docManagName": "DocPRUEBA -- 2",
+      "subCategory": "SUBcategoriaPrueba",
+      "from": "./",
+      "owner": "OWNERPRUEBA",
+      "geography": "ESP",
+      "entity": "PRUEBAENTITY",
+      "docDate": "2009-05-09T22:00:00.000+0000",
+      "description": "PRUEBA -- 2",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/documents/2"
+        },
+        "document": {
+          "href": "http://localhost:8080/documents/2"
+        },
+        "documentCategory": {
+          "href": "http://localhost:8080/documents/2/documentCategory"
+        },
+        "inspectionsInDocument": {
+          "href": "http://localhost:8080/documents/2/inspectionsInDocument"
+        }
+      }
+    }
+  ],
+  "inspectionResults": [
+    {
+      "id": 1,
+      "description": "InspectionResultDePrueba  -- 1",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/resultInspects/10"
+        },
+        "resultInspect": {
+          "href": "http://localhost:8080/resultInspects/10"
+        },
+        "inspectionsInResult": {
+          "href": "http://localhost:8080/resultInspects/10/inspectionsInResult"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "description": "InspectionResultDePrueba -- 2",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/resultInspects/10"
+        },
+        "resultInspect": {
+          "href": "http://localhost:8080/resultInspects/10"
+        },
+        "inspectionsInResult": {
+          "href": "http://localhost:8080/resultInspects/10/inspectionsInResult"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "description": "InspectionResultDePrueba -- 3",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/resultInspects/10"
+        },
+        "resultInspect": {
+          "href": "http://localhost:8080/resultInspects/10"
+        },
+        "inspectionsInResult": {
+          "href": "http://localhost:8080/resultInspects/10/inspectionsInResult"
+        }
+      }
+    }
+  ],
+  "degreeProgress": [
+    {
+      "id": 1,
+      "description": "ESTO ES UN GRADO DE PRUEBA - 1",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/degreeProgresses/8"
+        },
+        "degreeProgress": {
+          "href": "http://localhost:8080/degreeProgresses/8"
+        },
+        "inspectionsInDegrees": {
+          "href": "http://localhost:8080/degreeProgresses/8/inspectionsInDegrees"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "description": "ESTO ES UN GRADO DE PRUEBA - 2",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/degreeProgresses/8"
+        },
+        "degreeProgress": {
+          "href": "http://localhost:8080/degreeProgresses/8"
+        },
+        "inspectionsInDegrees": {
+          "href": "http://localhost:8080/degreeProgresses/8/inspectionsInDegrees"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "description": "ESTO ES UN GRADO DE PRUEBA - 3",
+      "_links": {
+        "self": {
+          "href": "http://localhost:8080/degreeProgresses/8"
+        },
+        "degreeProgress": {
+          "href": "http://localhost:8080/degreeProgresses/8"
+        },
+        "inspectionsInDegrees": {
+          "href": "http://localhost:8080/degreeProgresses/8/inspectionsInDegrees"
+        }
+      }
+    }
+  ],
+  "api-document": {
+    "inspection": {
+      "model": {
+        "inspectionId": "INS0000003",
+        "dateEnd": "2018-03-20",
+        "dateInspection": "2018-03-20",
+        "dateReport": "2018-03-20",
+        "dateStart": "2018-03-20",
+        "degreeLvl": 1,
+        "degreeProgress": "degreeProgresses/1",
+        "feedback": "prueba",
+        "hasFindings": true,
+        "linkReport": [
+          "/documents/1"
+        ],
+        "owner": "OWNERPRUEBA",
+        "result": "inspectionresults/1",
+        "risks": [
+          "/typesofrisks/1"
+        ],
+        "scope": "scopeprueba",
+        "status": "statuses/1",
+        "subtypeRisk": "Credit risk",
+        "supervisionScope": "cosacosacosa",
+        "supervisoryAuthority": "supervisors/1",
+        "unitSubsidiary": "subsidiaries/54"
+      },
+      "response": {
+        "dateInspection": "2018-03-20T00:00:00.000+0000",
+        "subtypeRisk": "Credit risk",
+        "feedback": "prueba",
+        "dateStart": "2018-03-20T00:00:00.000+0000",
+        "dateEnd": "2018-03-20T00:00:00.000+0000",
+        "dateReport": "2018-03-20T00:00:00.000+0000",
+        "degreeLvl": 1,
+        "owner": "OWNERPRUEBA",
+        "supervisionScope": "cosacosacosa",
+        "hasFindings": true,
+        "scope": "cosacosacosa",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/inspections/INS0000003"
+          },
+          "inspection": {
+            "href": "http://localhost:8080/inspections/INS0000003"
+          },
+          "supervisoryAuthority": {
+            "href": "http://localhost:8080/inspections/INS0000003/supervisoryAuthority"
+          },
+          "result": {
+            "href": "http://localhost:8080/inspections/INS0000003/result"
+          },
+          "status": {
+            "href": "http://localhost:8080/inspections/INS0000003/status"
+          },
+          "linkReport": {
+            "href": "http://localhost:8080/inspections/INS0000003/linkReport"
+          },
+          "degreeProgress": {
+            "href": "http://localhost:8080/inspections/INS0000003/degreeProgress"
+          },
+          "unitSubsidiary": {
+            "href": "http://localhost:8080/inspections/INS0000003/unitSubsidiary"
+          },
+          "risks": {
+            "href": "http://localhost:8080/inspections/INS0000003/risks"
+          },
+          "findingsInInspection": {
+            "href": "http://localhost:8080/inspections/INS0000003/findingsInInspection"
+          }
+        }
+      }
+    },
+    "division": {
+      "model": {
+        "id": 10,
+        "description": "ESTO ES UNA DIVISION DE PRUEBA"
+      },
+      "response": {
+        "description": "ESTO ES UNA DIVISION DE PRUEBA",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/divisions/10"
+          },
+          "division": {
+            "href": "http://localhost:8080/divisions/10"
+          },
+          "findingsInDivision": {
+            "href": "http://localhost:8080/divisions/10/findingsInDivision"
+          }
+        }
+      }
+    },
+    "degreeProgress": {
+      "model": {
+        "id": 8,
+        "description": "ESTO ES UN GRADO DE PRUEBA"
+      },
+      "response": {
+        "description": "ESTO ES UN GRADO DE PRUEBA",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/degreeProgresses/8"
+          },
+          "degreeProgress": {
+            "href": "http://localhost:8080/degreeProgresses/8"
+          },
+          "inspectionsInDegrees": {
+            "href": "http://localhost:8080/degreeProgresses/8/inspectionsInDegrees"
+          }
+        }
+      }
+    },
+    "typeOfRisk": {
+      "model": {
+        "id": 13,
+        "typeCode": 5,
+        "typeName": "Riesgo de prueba",
+        "subTypeCode": 1,
+        "subTypeName": "Subriesgo de prueba",
+        "description": "es un riesgo de prueba"
+      },
+      "response": {
+        "typeCode": 5,
+        "typeName": "Riesgo de prueba",
+        "subTypeCode": 1,
+        "subTypeName": "Subriesgo de prueba",
+        "description": "es un riesgo de prueba",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/typesofrisks/13"
+          },
+          "typeRisk": {
+            "href": "http://localhost:8080/typesofrisks/13"
+          },
+          "inspections": {
+            "href": "http://localhost:8080/typesofrisks/13/inspections"
+          },
+          "findings": {
+            "href": "http://localhost:8080/typesofrisks/13/findings"
+          }
+        }
+      }
+    },
+    "supervisor": {
+      "model": {
+        "id": "349",
+        "description": "ES UN SUPERVISOR DE PRUEBA",
+        "startDate": "2018-05-30",
+        "endDate": "2018-12-10"
+      },
+      "response": {
+        "description": "ES UN SUPERVISOR DE PRUEBA",
+        "startDate": "2018-05-30T00:00:00.000+0000",
+        "endDate": "2018-12-10T00:00:00.000+0000",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/supervisors/349"
+          },
+          "supervisor": {
+            "href": "http://localhost:8080/supervisors/349"
+          },
+          "inspectionsInSupervisor": {
+            "href": "http://localhost:8080/supervisors/349/inspectionsInSupervisor"
+          },
+          "findingsInSupervisor": {
+            "href": "http://localhost:8080/supervisors/349/findingsInSupervisor"
+          }
+        }
+      }
+    },
+    "subsidiary": {
+      "model": {
+        "id": "5246",
+        "cargabalCode": "8832",
+        "entityName": "SUBSIDIARIO DE PRUEBA"
+      },
+      "response": {
+        "cargabalCode": 8832,
+        "entityName": "SUBSIDIARIO DE PRUEBA",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/subsidiaries/5246"
+          },
+          "subsidiaries": {
+            "href": "http://localhost:8080/subsidiaries/5246"
+          },
+          "inspectionsInEntity": {
+            "href": "http://localhost:8080/subsidiaries/5246/inspectionsInEntity"
+          }
+        }
+      }
+    },
+    "inspectionResult": {
+      "model": {
+        "id": 10,
+        "description": "InspectionResultDePrueba"
+      },
+      "response": {
+        "description": "InspectionResultDePrueba",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/resultInspects/10"
+          },
+          "resultInspect": {
+            "href": "http://localhost:8080/resultInspects/10"
+          },
+          "inspectionsInResult": {
+            "href": "http://localhost:8080/resultInspects/10/inspectionsInResult"
+          }
+        }
+      }
+    },
+    "documentType": {
+      "model": {
+        "id": "8",
+        "description": "DESCRIPCION DE PRUEBA"
+      },
+      "response": {
+        "description": "Annual Inspections",
+        "documentsInCategory": [
+          {
+            "docManagName": "`PRUEBA",
+            "subCategory": "SUB",
+            "from": "./",
+            "owner": "OWNERPRUEBA",
+            "geography": "ESP",
+            "entity": "PRUEBAENTITY",
+            "docDate": "2009-05-09T22:00:00.000+0000",
+            "description": "PRUEBA"
+          }
+        ],
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/documentTypes/1"
+          },
+          "documentType": {
+            "href": "http://localhost:8080/documentTypes/1"
+          },
+          "documentsInCategory": {
+            "href": "http://localhost:8080/documentTypes/1/documentsInCategory"
+          }
+        }
+      }
+    },
+    "document": {
+      "model": {
+        "id": 2,
+        "docManagName": "DocPRUEBA",
+        "category": "http://localhost:8080/documentTypes/1",
+        "subCategory": "SUBcategoriaPrueba",
+        "from": "./",
+        "owner": "OWNERPRUEBA",
+        "geography": "ESP",
+        "entity": "PRUEBAENTITY",
+        "docDate": "2009-05-09T22:00:00.000+0000",
+        "description": "PRUEBA"
+      },
+      "response": {
+        "docManagName": "DocPRUEBA",
+        "subCategory": "SUBcategoriaPrueba",
+        "from": "./",
+        "owner": "OWNERPRUEBA",
+        "geography": "ESP",
+        "entity": "PRUEBAENTITY",
+        "docDate": "2009-05-09T22:00:00.000+0000",
+        "description": "PRUEBA",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/documents/2"
+          },
+          "document": {
+            "href": "http://localhost:8080/documents/2"
+          },
+          "documentCategory": {
+            "href": "http://localhost:8080/documents/2/documentCategory"
+          },
+          "inspectionsInDocument": {
+            "href": "http://localhost:8080/documents/2/inspectionsInDocument"
+          }
+        }
+      }
+    }
+  }
 }

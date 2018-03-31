@@ -6,6 +6,7 @@ export interface Inspection {
   dateOfCommunication: string;
   scope: string;
   riskType: string;
+  subtypeRisk: string;
   status: string;
   reportDate: string;
   inspectionResult: string;
@@ -14,6 +15,8 @@ export interface Inspection {
   owner: string;
   finding: boolean;
   category: string;
+  categoryCode: string;
   comments: string;
   expectedEndDate: string;
+  startingDate: string;
 }

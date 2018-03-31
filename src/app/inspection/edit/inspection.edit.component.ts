@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Inspection } from '../Inspection';
@@ -51,49 +52,58 @@ export class InspectionEditComponent implements OnInit {
   public inspectionResult: string = null;
 
   public statusList = [ 'Upcoming', 'Ongoing', 'Concluded', 'Closed' ];
-  public inspectionResultsList = [ '1', '2', '3' ];
+  public inspectionResultsList = [];
   public progressList = [ 'Adequate', 'Intermediate', 'Inadequate' ];
   public ownerList = ['Owner1', 'Owner2', 'Owner3'];
   public categoryList = ['Annual Inspections', 'Ad-hoc Inspections', 'Thematic review', 'Deep dive', 'IMI'];
 
-  constructor(private route: ActivatedRoute, private router: Router, private service: InspectionService) {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: InspectionService,
+    private snackBar: MatSnackBar,
+  ) { }
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
       this.inspectionId = params['id'];
-      this.getInspection();
+      this.getOptionsForEdit();
     });
   }
 
-  public getInspection() {
-    this.service
-      .getInspection(this.inspectionId)
-      .subscribe((res: Inspection) => {
-        this.inspection = res;
+  public getOptionsForEdit() {
+    this.service.getOptionsForEdit(this.inspectionId).subscribe((results) => {
+      const inspection: any = results[0];
+      const inspectionResults: any = results[1];
+      const degreeProgress: any = results[2];
 
-        if (res.dateOfCommunication) {
-          this.startingDate = new FormControl(moment(res.dateOfCommunication));
-        }
-        if (res.reportDate) {
-          this.reportDate = new FormControl(moment(res.reportDate));
-        }
-        if (res.expectedEndDate) {
-          this.expectedEndDate = new FormControl(moment(res.expectedEndDate));
-        }
+      if (inspection.startingDate) {
+        this.startingDate = new FormControl(moment(inspection.startingDate));
+      }
+      if (inspection.reportDate) {
+        this.reportDate = new FormControl(moment(inspection.reportDate));
+      }
+      if (inspection.expectedEndDate) {
+        this.expectedEndDate = new FormControl(moment(inspection.expectedEndDate));
+      }
 
-        this.status = res.status;
-        this.degree = res.degree;
-        this.degreeOfProcess = res.degreeOfProcess;
-        this.owner = res.owner;
-        this.finding = res.finding;
-        this.category = res.category;
-        this.comments = res.comments;
-        this.inspectionResult = res.inspectionResult;
-      });
+      this.status = inspection.status;
+      this.degree = inspection.degree;
+      this.degreeOfProcess = inspection.degreeOfProcess;
+      this.owner = inspection.owner;
+      this.finding = inspection.finding;
+      this.category = inspection.category;
+      this.comments = inspection.comments;
+      this.inspectionResult = inspection.inspectionResult;
+
+      this.inspection = inspection;
+      this.inspectionResultsList = inspectionResults.map((result) => result.id);
+      this.progressList = degreeProgress.map((degree) => degree.description);
+    });
   }
 
   public updateInspection() {
+    // Prepare update params
     const changedParams: any = {
       status: this.status,
       degree: this.degree,
@@ -105,7 +115,7 @@ export class InspectionEditComponent implements OnInit {
       inspectionResult: this.inspectionResult,
     };
 
-    changedParams.dateOfCommunication = this.startingDate.value
+    changedParams.startingDate = this.startingDate.value
       ? moment(this.startingDate.value).format('YYYY-MM-DD')
       : null;
 
@@ -119,14 +129,21 @@ export class InspectionEditComponent implements OnInit {
 
     const inspection = { ...this.inspection, ...changedParams };
 
-    console.log('inspection', inspection);
     this.service
       .updateInspection(this.inspectionId, inspection)
       .subscribe((res: Inspection) => {
-        console.log(res);
+        this.snackBar.open('Updated successfully', null, {
+          duration: 2000,
+        });
+
+        // Navigate to inspections list
         this.router.navigate(['inspection/list']);
       }, (error) => {
         console.log('Error', error);
+
+        this.snackBar.open('Error occurred unexpectedly', null, {
+          duration: 1500,
+        });
       });
   }
 
