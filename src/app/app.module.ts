@@ -28,7 +28,6 @@ import { DevModuleModule } from './+dev-module';
 import { HeaderComponent } from './layout/header';
 import { NavComponent } from './layout/nav';
 import { FooterComponent } from './layout/footer';
-import { FindingComponent } from './finding/finding.component';
 
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -52,7 +51,6 @@ const APP_PROVIDERS = [
     HeaderComponent,
     NavComponent,
     FooterComponent,
-    FindingComponent,
   ],
   /**
    * Import Angular's modules.

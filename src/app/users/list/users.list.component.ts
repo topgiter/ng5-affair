@@ -29,8 +29,24 @@ import { UserDeleteConfirmDialogComponent } from './user.delete.confirm.dialog';
 })
 export class UsersListComponent implements AfterViewInit, OnInit {
   public showResult: boolean = true;
-
+  public identifier: string = null;
+  public name: string = null;
+  public country: string = null;
+  public group: string = null;
+  public profile: string = null;
+  public contact: boolean = null;
+  public scope: boolean = null;
   public dataSource = new MatTableDataSource([]);
+
+  public countryList: string[] = [
+    'Spain', 'France', 'Germany', 'England'
+  ];
+  public groupList: string[] = [
+    'All Funds', 'Tax Advice', 'Legal Advice'
+  ];
+  public profileList: string[] = [
+    'Administrator', 'General', 'Consultation', 'Risks'
+  ];
 
   @ViewChild(MatSort) public sort: MatSort;
   @ViewChild(MatPaginator) public paginator: MatPaginator;
@@ -77,7 +93,35 @@ export class UsersListComponent implements AfterViewInit, OnInit {
   public searchUser() {
     const params: any = {};
 
-    // TODO
+    if (this.identifier) {
+      params.identifier = this.identifier;
+    }
+    if (this.name) {
+      params.name = this.name;
+    }
+    if (this.country) {
+      params.country = this.country;
+    }
+    if (this.group) {
+      params.group = this.group;
+    }
+    if (this.scope) {
+      params.scope = this.scope;
+    }
+    if (this.profile) {
+      params.profile = this.profile;
+    }
+    if (this.contact) {
+      params.contact = this.contact;
+    }
+
+    this.service
+      .searchUser(params)
+      .subscribe((users: User[]) => {
+        this.dataSource = new MatTableDataSource<User>(users);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
   }
 
   public deleteUser(user) {

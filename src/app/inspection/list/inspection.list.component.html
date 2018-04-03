@@ -215,7 +215,7 @@
               </a>
             </span>
             <span matTooltip="{{ 'Access to the screen of Associated Findings' | translate }}" [matTooltipPosition]="'above'">
-              <a [routerLink]=" ['/finding'] "
+              <a [routerLink]=" ['/finding/list'] " [queryParams]="{ inspectionId: element.id }"
                 mat-icon-button color="primary">
                 <mat-icon aria-label="Access to the screen for Associated Findings">subject</mat-icon>
               </a>

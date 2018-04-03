@@ -18,6 +18,72 @@
     </a>
   </div>
 
+  <div class="users-list-filters" *ngIf="!showResult">
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Identifier' | translate }}" [(ngModel)]="identifier" />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Name' | translate }}" [(ngModel)]="name" />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Country' | translate }}" [(value)]="country" >
+            <mat-option *ngFor="let item of countryList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Group' | translate }}" [(value)]="group">
+            <mat-option *ngFor="let item of groupList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Profile' | translate }}" [(value)]="profile">
+            <mat-option *ngFor="let item of profileList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Scope' | translate}}" [(ngModel)]="scope" />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Contact' | translate }}" [(value)]="contact">
+            <mat-option [value]="true">
+              {{ 'Yes' | translate }}
+            </mat-option>
+            <mat-option [value]="false">
+              {{ 'No' | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col text-align-center">
+        <button mat-raised-button color="primary" (click)="toggleSearch()">{{ 'Search' | translate }}</button>
+      </div>
+    </div>
+  </div>
+
   <div class="users-list-download">
     <button mat-button (click)="downloadUsers()">
       <mat-icon aria-label="download">file_download</mat-icon>

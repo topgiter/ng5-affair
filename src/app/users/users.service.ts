@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 
 import { User } from './User';
+import { Inspection } from '../inspection/Inspection';
 
 @Injectable()
 export class UsersService {
@@ -67,4 +68,21 @@ export class UsersService {
         return res;
       });
   }
+
+  public searchUser(params) {
+    const uri = this.apiUrl + '/users';
+    let searchParams = new HttpParams();
+
+    Object.keys(params).forEach((key) => {
+      searchParams = searchParams.append(key, params[key]);
+    });
+
+    return this
+      .http
+      .get(uri, { params })
+      .map((users: User[]) => {
+        return users;
+      });
+  }
+
 }

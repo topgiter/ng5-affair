@@ -1,4 +1,58 @@
 {
+  "findings": [
+    {
+      "id": "INS0000002FIN0001",
+      "supervisor": "BCB00034",
+      "title": "Título 1",
+      "description": "# 2 - Infraestrutura de TI para analisar e monitorar as exposições Para efetuar",
+      "riskType": "Credit Risk",
+      "criticality": "1",
+      "endDate": "20/03/2018",
+      "modifiedEndDate": "",
+      "endDateComments": "",
+      "geography": "Brasil",
+      "function": "Custódia Escrituração"
+    },
+    {
+      "id": "INS0000002FIN0002",
+      "supervisor": "BCB00035",
+      "title": "Título 2",
+      "description": "# 4 - As deficiências observadas na ferramenta de monitoramento do Aqua Aqua é um sistema utilizado pela instituição para monitorar exposições e para avaliar os devedores na carteira de pessoa jurídica. A verificação in loco desta ferramenta revelou deficiências relacionadas a um controle de qualidade limitado dos relatórios, conteúdo insuficiente ou explicações de variável chave, mudanças inexplicáveis de classificação, etc.",
+      "riskType": "Credit Risk",
+      "criticality": "2",
+      "endDate": "06/03/2018",
+      "modifiedEndDate": "",
+      "endDateComments": "",
+      "geography": "Brasil",
+      "function": "Custódia Escrituração"
+    },
+    {
+      "id": "INS0000002FIN0003",
+      "supervisor": "BCB00036",
+      "title": "Título 3",
+      "description": "# 7 - Colateral Durante a inspeção in loco, os seguintes problemas foram identificados no que diz respeito às garantias para exposições ao risco de crédito: Garantias e cauções têm um efeito fraco como um mitigador de risco na recuperação de créditos, devido às características gerais do sistema financeiro do Brasil e aos aspectos específicos da instituição. Estes últimos são: (i) a fiabilidade limitada de arquivos, em seguida, confiabilidade limitada dos arquivos de garantias prestadas em conjunto com fita de empréstimo; (ii) a qualidade de crédito geral de um devedor para qual uma garantia não é analisada; e (iii) limitada rastreabilidade da exposição, que acabaram por serem registrados como encerrados enquanto ativos ou anulados.",
+      "riskType": "Credit Risk",
+      "criticality": "1",
+      "endDate": "14/02/2018",
+      "modifiedEndDate": "",
+      "endDateComments": "",
+      "geography": "Brasil",
+      "function": "Custódia Escrituração"
+    },
+    {
+      "id": "INS0000003FIN0001",
+      "supervisor": "BCB00041",
+      "title": "Título 4",
+      "description": "Com base nos 6 emissores para os quais o Banco globalinc.png prestava serviços de escrituração de valores mobiliários no período da auditoria (com exceção do próprio Banco globalinc.png como emissor), selecionamos os 3 emissores relacionados a seguir e solicitamos os respectivos contratos de prestação de serviços de escrituração, com objetivo de avaliar se possuíam o conteúdo mínimo requerido pelo artigo 11 da Instrução CVM 543/2013:",
+      "riskType": "Regulatory",
+      "criticality": "3",
+      "endDate": "21/02/2018",
+      "modifiedEndDate": "15/08/2017",
+      "endDateComments": "Comentarios",
+      "geography": "Brasil",
+      "function": "Custódia Escrituração"
+    }
+  ],
   "users": [
     {
       "name": "Application BankTrade",

@@ -1,0 +1,99 @@
+<div class="finding-create-dialog">
+  <h2 mat-dialog-title>
+    <mat-icon aria-label="Create">create</mat-icon>
+    <span>{{ 'Finding Registration' | translate }}</span>
+  </h2>
+  <div mat-dialog-content>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{'Finding Supervisor ID' | translate}}" [(ngModel)]="supervisor" />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Risk Type' | translate }}" [(value)]="riskType" [formControl]="riskTypeControl" required>
+            <mat-option *ngFor="let item of riskTypeList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <span class="criticality-label">
+          <label>{{ 'Criticality' | translate }} *</label>
+        </span>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <span *ngIf="!criticality">{{ 'N/A' | translate }}</span>
+          <div *ngIf="criticality" [ngClass]="['result-icon', 'status-' + criticality]"></div>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngFor="let item of criticalityList" (click)="updateCriticality(item)">
+            <div [ngClass]="['result-icon', 'status-' + item]"></div>
+          </button>
+        </mat-menu>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="endDatePicker" placeholder="{{ 'End Date' | translate }}" [formControl]="endDate" required>
+          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="modifiedEndDatePicker" placeholder="{{ 'Modified End Date' | translate }}" [formControl]="modifiedEndDate">
+          <mat-datepicker-toggle matSuffix [for]="modifiedEndDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #modifiedEndDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Geography' | translate }}" [(value)]="geography">
+            <mat-option *ngFor="let item of geographyList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Function' | translate }}" [(value)]="functional" [formControl]="functionalControl" required>
+            <mat-option *ngFor="let item of functionalList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="{{ 'Comments' | translate }}" [formControl]="titleControl" [(ngModel)]="title" required ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="{{ 'Description' | translate }}" [formControl]="descriptionControl" [(ngModel)]="description" required></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="{{ 'End Date Comments' | translate }}" [formControl]="endDateCommentsControl" [(ngModel)]="endDateComments" required></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="clear()">{{ 'Clear' | translate }}</button>
+    <button mat-raised-button (click)="close()">{{ 'Close' | translate }}</button>
+    <button mat-raised-button color="primary" (click)="create()" cdkFocusInitial>{{ 'Create' | translate }}</button>
+  </div>
+</div>

@@ -1,0 +1,191 @@
+<div class="finding-list">
+  <div class="finding-list-header">
+    <h2>
+      <mat-icon aria-label="Findings">folder_open</mat-icon>
+      <span>{{ 'Findings' | translate }}</span>
+    </h2>
+  </div>
+
+  <div class="inspection-details" *ngIf="inspection">
+    <div class="col">
+      <div>
+        <b>{{ 'Inspection Id' | translate }}:</b> {{ inspection.id }}
+      </div>
+      <div>
+        <b>{{ 'Supervisory Authority' | translate }}:</b> {{ inspection.supervisoryAuthority }}
+      </div>
+      <div>
+        <b>{{ 'Cargabal Code' | translate }}:</b> {{ inspection.categoryCode }}
+      </div>
+      <div>
+        <b>{{ 'Date of the communication' | translate }}:</b> {{ inspection.dateOfCommunication }}
+      </div>
+      <div>
+        <b>{{ 'Scope' | translate }}:</b> {{ inspection.scope }}
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <b>{{ 'Risk Type' | translate }}:</b> {{ inspection.riskType }}
+      </div>
+      <div>
+        <b>{{ 'Primary Risk Subtype' | translate }}:</b> {{ inspection.subtypeRisk }}
+      </div>
+      <div>
+        <b>{{ 'Comments' | translate }}:</b> {{ inspection.comments }}
+      </div>
+      <div>
+        <b>{{ 'Status' | translate }}:</b> {{ inspection.status }}
+      </div>
+      <div>
+        <b>{{ 'Geography' | translate }}:</b> {{ inspection.geography }}
+      </div>
+      <div>
+        <b>{{ 'Unit/Subsidiary' | translate }}:</b> {{ inspection.unitSubsidiary }}
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <b>{{ 'Owner' | translate }}:</b> {{ inspection.owner }}
+      </div>
+      <div>
+        <b>{{ 'Starting Date' | translate }}:</b> {{ inspection.startingDate }}
+      </div>
+      <div>
+        <b>{{ 'Expected End Date' | translate }}:</b> {{ inspection.expectedEndDate }}
+      </div>
+      <div>
+        <b>{{ 'Report Date' | translate }}:</b> {{ inspection.reportDate }}
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <b>{{ 'Inspection Result' | translate }}:</b> <span [ngClass]="['result-icon', 'status-' + inspection.inspectionResult ]"></span>
+      </div>
+      <div>
+        <b>{{ 'Degree of Implementation' | translate }}:</b> {{ inspection.degree }}
+      </div>
+      <div>
+        <b>{{ 'Degree of progress' | translate }}:</b> {{ inspection.degreeOfProcess }}
+      </div>
+    </div>
+  </div>
+
+  <mat-tab-group >
+    <mat-tab label="{{ 'Findings' | translate }}">
+      <div class="finding-list-actions">
+        <button mat-button (click)="downloadFindings()">
+          <mat-icon aria-label="download">file_download</mat-icon>
+          {{ 'Export' | translate }}
+        </button>
+        <button mat-raised-button color="warn" (click)="openCreateDialog()">
+          {{ 'Finding Registration' | translate }}
+        </button>
+      </div>
+      <div class="finding-list-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource" matSort>
+
+          <!-- Id Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Finding Id' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+          <!-- Supervisor Column -->
+          <ng-container matColumnDef="supervisor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Finding Supervisor Id' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.supervisor}} </mat-cell>
+          </ng-container>
+          <!-- Title Column -->
+          <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Title' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+          </ng-container>
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="description"> {{ 'Description' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="description"> {{element.description}} </mat-cell>
+          </ng-container>
+          <!-- Risk Type Column -->
+          <ng-container matColumnDef="riskType">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Risk Type' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.riskType}} </mat-cell>
+          </ng-container>
+          <!-- Criticality Column -->
+          <ng-container matColumnDef="criticality">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Criticality' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <div [ngClass]="['result-icon', 'status-' + element.criticality]">
+              </div>
+            </mat-cell>
+          </ng-container>
+          <!-- End Date Column -->
+          <ng-container matColumnDef="endDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'End Date' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.endDate}} </mat-cell>
+          </ng-container>
+          <!-- Modified End Date Column -->
+          <ng-container matColumnDef="modifiedEndDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Modified End Date' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.modifiedEndDate}} </mat-cell>
+          </ng-container>
+          <!-- End Date Comments Column -->
+          <ng-container matColumnDef="endDateComments">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'End Date Comments' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.endDateComments}} </mat-cell>
+          </ng-container>
+          <!-- Geography Column -->
+          <ng-container matColumnDef="geography">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Geography' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.geography}} </mat-cell>
+          </ng-container>
+          <!-- Function Column -->
+          <ng-container matColumnDef="functional">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Function' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.functional}} </mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef class="actions"> {{ 'Actions' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="actions">
+              <div class="action-group">
+            <span matTooltip="{{ 'Edit' | translate }}" [matTooltipPosition]="'above'">
+              <button mat-icon-button color="primary">
+                <mat-icon aria-label="details">mode_edit</mat-icon>
+              </button>
+            </span>
+                <span matTooltip="{{ 'Action Plans Access' | translate }}" [matTooltipPosition]="'above'">
+              <button mat-icon-button color="primary" >
+                <mat-icon aria-label="AP Access" >subject</mat-icon>
+              </button>
+            </span>
+                <span matTooltip="{{ 'Delete' | translate }}" [matTooltipPosition]="'above'">
+              <button mat-icon-button color="primary">
+                <mat-icon aria-label="Inspection Edition">delete</mat-icon>
+              </button>
+            </span>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator #paginator
+                       [pageSize]="5"
+                       [pageSizeOptions]="[5, 10, 20]"
+                       [showFirstLastButtons]="true">
+        </mat-paginator>
+      </div>
+    </mat-tab>
+    <mat-tab label="{{ 'Action Plans' | translate }}">
+      <div class="action-plans-container">
+        Actions
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+
+</div>
+
