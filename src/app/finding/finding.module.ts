@@ -10,6 +10,7 @@ import { SharedModule } from '../services/shared.module';
 import { FindingComponent } from './finding.component';
 import { FindingListComponent } from './list';
 import { FindingCreateDialogComponent } from './create';
+import { FindingEditDialogComponent } from './edit';
 
 // Services
 import { FindingService } from './finding.service';
@@ -47,9 +48,11 @@ import { MomentModule } from 'angular2-moment';
     FindingComponent,
     FindingListComponent,
     FindingCreateDialogComponent,
+    FindingEditDialogComponent,
   ],
   entryComponents: [
     FindingCreateDialogComponent,
+    FindingEditDialogComponent,
   ],
   imports: [
     CommonModule,

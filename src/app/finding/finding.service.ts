@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 
 import { Finding } from './Finding';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { User } from '../users/User';
 
 @Injectable()
 export class FindingService {
@@ -26,6 +25,17 @@ export class FindingService {
       });
   }
 
+  public getFinding(findingId) {
+    const uri = this.apiUrl + '/findings/' + findingId;
+
+    return this
+      .http
+      .get(uri)
+      .map((finding: Finding) => {
+        return finding;
+      });
+  }
+
   public createFinding(params) {
     const uri = this.apiUrl + '/findings';
 
@@ -34,6 +44,33 @@ export class FindingService {
       .post(uri, params)
       .map((finding: Finding) => {
         return finding;
+      });
+  }
+
+  public updateFinding(id, params) {
+    const uri = this.apiUrl + '/findings/' + id;
+
+    return this
+      .http
+      .put(uri, params)
+      .map((finding: Finding) => {
+        return finding;
+      });
+  }
+
+  public searchFinding(params) {
+    const uri = this.apiUrl + '/findings';
+    let searchParams = new HttpParams();
+
+    Object.keys(params).forEach((key) => {
+      searchParams = searchParams.append(key, params[key]);
+    });
+
+    return this
+      .http
+      .get(uri, { params })
+      .map((res: Finding[]) => {
+        return res;
       });
   }
 

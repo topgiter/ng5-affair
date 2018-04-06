@@ -1,5 +1,5 @@
 <div class="finding-list">
-  <div class="finding-list-header">
+  <div class="finding-list-title">
     <h2>
       <mat-icon aria-label="Findings">folder_open</mat-icon>
       <span>{{ 'Findings' | translate }}</span>
@@ -73,15 +73,116 @@
 
   <mat-tab-group >
     <mat-tab label="{{ 'Findings' | translate }}">
-      <div class="finding-list-actions">
+
+      <div class="finding-list-header">
+        <div>
+          <mat-icon aria-label="folder">
+            {{showResult ? 'folder_open' : 'search'}}
+          </mat-icon>
+        </div>
+        <div class="search-placeholder">
+          {{ (showResult ? 'Results of Finding' : 'Search for Finding') | translate }}
+        </div>
+        <button mat-raised-button class="search-btn" (click)="toggleSearch()">
+          {{ 'Search' | translate }}
+          <mat-icon aria-label="search">{{showResult ? 'add' : 'remove'}}</mat-icon>
+        </button>
+        <button mat-raised-button class="registration-btn" color="warn" (click)="openCreateDialog()">
+          {{ 'Finding Registration' | translate }}
+        </button>
+      </div>
+
+      <div class="finding-list-filters" *ngIf="!showResult">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="{{ 'Finding Id' | translate }}" [(ngModel)]="findingId" />
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="{{'Finding Supervisor ID' | translate}}" [(ngModel)]="supervisor" />
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="{{ 'Risk Type' | translate }}" [(value)]="riskType">
+                <mat-option *ngFor="let item of riskTypeList" [value]="item">
+                  {{ item | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <span class="criticality-label">
+              <label>{{ 'Criticality' | translate }} *</label>
+            </span>
+            <button mat-button [matMenuTriggerFor]="menu">
+              <span *ngIf="!criticality">{{ 'N/A' | translate }}</span>
+              <div *ngIf="criticality" [ngClass]="['result-icon', 'status-' + criticality]"></div>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item *ngFor="let item of criticalityList" (click)="updateCriticality(item)">
+                <div [ngClass]="['result-icon', 'status-' + item]"></div>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput [matDatepicker]="endDatePicker" placeholder="{{ 'End Date' | translate }}" [formControl]="endDate">
+              <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput [matDatepicker]="modifiedEndDatePicker" placeholder="{{ 'Modified End Date' | translate }}" [formControl]="modifiedEndDate">
+              <mat-datepicker-toggle matSuffix [for]="modifiedEndDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #modifiedEndDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="{{ 'Geography' | translate }}" [(value)]="geography">
+                <mat-option *ngFor="let item of geographyList" [value]="item">
+                  {{ item | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="{{ 'Function' | translate }}" [(value)]="functional" >
+                <mat-option *ngFor="let item of functionalList" [value]="item">
+                  {{ item | translate }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="{{ 'Title' | translate }}" [(ngModel)]="title" />
+            </mat-form-field>
+          </div>
+          <div class="col text-align-center">
+            <button mat-raised-button color="primary" (click)="toggleSearch()">{{ 'Search' | translate }}</button>
+          </div>
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+      </div>
+
+      <div class="finding-list-download">
         <button mat-button (click)="downloadFindings()">
           <mat-icon aria-label="download">file_download</mat-icon>
           {{ 'Export' | translate }}
         </button>
-        <button mat-raised-button color="warn" (click)="openCreateDialog()">
-          {{ 'Finding Registration' | translate }}
-        </button>
       </div>
+
       <div class="finding-list-container mat-elevation-z8">
         <mat-table #table [dataSource]="dataSource" matSort>
 
@@ -121,12 +222,16 @@
           <!-- End Date Column -->
           <ng-container matColumnDef="endDate">
             <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'End Date' | translate}}  </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.endDate}} </mat-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.endDate ? (element.endDate | amParse:'YYYY-MM-DD' | amDateFormat: 'DD/MM/YYYY') : '' }}
+            </mat-cell>
           </ng-container>
           <!-- Modified End Date Column -->
           <ng-container matColumnDef="modifiedEndDate">
             <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Modified End Date' | translate}}  </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.modifiedEndDate}} </mat-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.modifiedEndDate ? (element.modifiedEndDate | amParse:'YYYY-MM-DD' | amDateFormat: 'DD/MM/YYYY') : '' }}
+            </mat-cell>
           </ng-container>
           <!-- End Date Comments Column -->
           <ng-container matColumnDef="endDateComments">
@@ -150,7 +255,7 @@
             <mat-cell *matCellDef="let element" class="actions">
               <div class="action-group">
             <span matTooltip="{{ 'Edit' | translate }}" [matTooltipPosition]="'above'">
-              <button mat-icon-button color="primary">
+              <button mat-icon-button color="primary" (click)="openEditFinding(element.id)">
                 <mat-icon aria-label="details">mode_edit</mat-icon>
               </button>
             </span>

@@ -23,9 +23,9 @@ export const MY_FORMATS = {
 };
 
 @Component({
-  selector: 'finding-create-dialog',
-  templateUrl: 'finding.create.dialog.html',
-  styleUrls: ['./finding.create.dialog.scss'],
+  selector: 'finding-edit-dialog',
+  templateUrl: 'finding.edit.dialog.html',
+  styleUrls: ['./finding.edit.dialog.scss'],
   providers: [
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
@@ -34,7 +34,8 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
-export class FindingCreateDialogComponent implements OnInit {
+export class FindingEditDialogComponent implements OnInit {
+  public findingId: string;
   public supervisor: string = null;
   public riskType: string = null;
   public criticality: string = null;
@@ -66,14 +67,32 @@ export class FindingCreateDialogComponent implements OnInit {
   ];
 
   constructor(
-    public dialogRef: MatDialogRef<FindingCreateDialogComponent>,
+    public dialogRef: MatDialogRef<FindingEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public service: FindingService,
     private snackBar: MatSnackBar,
   ) { }
 
   public ngOnInit() {
-    // TODO: load options list
+    this.findingId = this.data.findingId;
+    this.getFinding();
+  }
+
+  public getFinding() {
+    this.service
+      .getFinding(this.findingId)
+      .subscribe((finding: Finding) => {
+        this.supervisor = finding.supervisor;
+        this.riskType = finding.riskType;
+        this.criticality = finding.criticality;
+        this.endDate = finding.endDate ? new FormControl(moment(finding.endDate)) : new FormControl(null);
+        this.modifiedEndDate = finding.modifiedEndDate ? new FormControl(moment(finding.modifiedEndDate)) : new FormControl(null);
+        this.geography = finding.geography;
+        this.functional = finding.functional;
+        this.title = finding.title;
+        this.description = finding.description;
+        this.endDateComments = finding.endDateComments;
+      });
   }
 
   public updateCriticality(status) {
@@ -81,23 +100,23 @@ export class FindingCreateDialogComponent implements OnInit {
   }
 
   public clear() {
-  this.supervisor = null;
-  this.riskType = null;
-  this.criticality = null;
-  this.endDate.setValue(null);
-  this.modifiedEndDate.setValue(null);
-  this.geography = null;
-  this.functional = null;
-  this.title = null;
-  this.description = null;
-  this.endDateComments = null;
+    this.supervisor = null;
+    this.riskType = null;
+    this.criticality = null;
+    this.endDate.setValue(null);
+    this.modifiedEndDate.setValue(null);
+    this.geography = null;
+    this.functional = null;
+    this.title = null;
+    this.description = null;
+    this.endDateComments = null;
   }
 
   public close(): void {
     this.dialogRef.close();
   }
 
-  public create(): void {
+  public update(): void {
     // Check Required form fields
     if (this.checkValidation() === false) {
       this.snackBar.open('Please fill in the required fields', null, {
@@ -126,9 +145,9 @@ export class FindingCreateDialogComponent implements OnInit {
     finding.endDateComments = this.endDateComments;
 
     this.service
-      .createFinding(finding)
+      .updateFinding(this.findingId, finding)
       .subscribe((res: Finding) => {
-        this.snackBar.open('Created a finding successfully', null, {
+        this.snackBar.open('Updated the finding successfully', null, {
           duration: 2000,
         });
 

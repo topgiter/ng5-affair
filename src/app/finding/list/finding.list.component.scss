@@ -1,8 +1,81 @@
 .finding-list {
-  .finding-list-header {
+  .finding-list-title {
     display: flex;
     padding: 8px;
     align-items: center;
+  }
+
+  .finding-list-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    .search-placeholder {
+      margin-left: 8px;
+    }
+
+    .search-btn {
+      margin-left: 16px;
+    }
+
+    .registration-btn {
+      margin-left: 16px;
+    }
+  }
+
+  .finding-list-download {
+    padding: 8px 16px;
+  }
+
+  .finding-list-filters {
+    padding: 16px 96px;
+    background-color: #FAFAFA;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+
+      .col {
+        flex: 1;
+        padding: 4px 16px;
+      }
+    }
+
+
+    .criticality-label {
+      display: block;
+      font-family: Roboto,"Helvetica Neue",sans-serif;
+      margin-bottom: 4px;
+      margin-top: -2px;
+
+      label {
+        color: rgba(0, 0, 0, 0.44);
+        font-size: 13px;
+      }
+    }
+
+    .result-icon {
+      height: 25px;
+      width: 25px;
+      background-color: transparent;
+      border-radius: 50%;
+      margin-left: 24px;
+      margin-right: 16px;
+
+      &.status-1 {
+        background-color: #ff0000;
+      }
+
+      &.status-2 {
+        background-color: #f78f00;
+      }
+
+      &.status-3 {
+        background-color: #33b91c;
+      }
+    }
   }
 
   .inspection-details {
