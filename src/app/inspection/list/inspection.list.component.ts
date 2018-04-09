@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit, DoCheck } from '@angular/core';
 import { MatDialog, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
@@ -6,7 +6,7 @@ import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { InspectionRelatedDialogComponent } from '../related';
 import { Inspection } from '../Inspection';
 import { InspectionService } from '../inspection.service';
-import { TranslateService } from '../../services/translate';
+import { TranslatePipe } from '../../services/translate.pipe';
 import { FormControl } from '@angular/forms';
 
 import * as _moment from 'moment';
@@ -21,7 +21,7 @@ const moment = _rollupMoment || _moment;
   styleUrls: ['inspection.list.component.scss'],
   templateUrl: 'inspection.list.component.html',
 })
-export class InspectionListComponent implements AfterViewInit, OnInit {
+export class InspectionListComponent implements AfterViewInit, OnInit, DoCheck {
   public showResult: boolean = true;
 
   public displayedColumns = [
@@ -62,8 +62,9 @@ export class InspectionListComponent implements AfterViewInit, OnInit {
 
   constructor(
     private service: InspectionService,
-    private translateService: TranslateService,
-    private dialog: MatDialog) {}
+    private translatePipe: TranslatePipe,
+    private dialog: MatDialog
+  ) {}
 
   public ngOnInit() {
     this.getInspections();
@@ -84,6 +85,15 @@ export class InspectionListComponent implements AfterViewInit, OnInit {
   public ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  public ngDoCheck() {
+    // Translate pagination buttons
+    this.paginator._intl.itemsPerPageLabel = this.translatePipe.transform('Items per page');
+    this.paginator._intl.firstPageLabel = this.translatePipe.transform('First page');
+    this.paginator._intl.nextPageLabel = this.translatePipe.transform('Next page');
+    this.paginator._intl.previousPageLabel = this.translatePipe.transform('Previous page');
+    this.paginator._intl.lastPageLabel = this.translatePipe.transform('Last page');
   }
 
   public openRelatedDocumentDialog(inspection) {

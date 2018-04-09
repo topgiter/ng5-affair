@@ -58,6 +58,17 @@ export class FindingService {
       });
   }
 
+  public deleteFinding(id) {
+    const uri = this.apiUrl + '/findings/' + id;
+
+    return this
+      .http
+      .delete(uri)
+      .map((res: any) => {
+        return res;
+      });
+  }
+
   public searchFinding(params) {
     const uri = this.apiUrl + '/findings';
     let searchParams = new HttpParams();

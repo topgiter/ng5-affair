@@ -15,6 +15,7 @@ import { UserDeleteConfirmDialogComponent } from './list/user.delete.confirm.dia
 
 // Services
 import { UsersService } from './users.service';
+import { TranslatePipe } from '../services/translate.pipe';
 
 // Angular Material Modules
 import {
@@ -84,6 +85,7 @@ import { MomentModule } from 'angular2-moment';
   ],
   providers: [
     UsersService,
+    TranslatePipe,
   ],
 })
 export class UsersModule {

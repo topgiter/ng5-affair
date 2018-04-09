@@ -254,21 +254,21 @@
             <mat-header-cell *matHeaderCellDef class="actions"> {{ 'Actions' | translate }} </mat-header-cell>
             <mat-cell *matCellDef="let element" class="actions">
               <div class="action-group">
-            <span matTooltip="{{ 'Edit' | translate }}" [matTooltipPosition]="'above'">
-              <button mat-icon-button color="primary" (click)="openEditFinding(element.id)">
-                <mat-icon aria-label="details">mode_edit</mat-icon>
-              </button>
-            </span>
+                <span matTooltip="{{ 'Edit' | translate }}" [matTooltipPosition]="'above'">
+                  <button mat-icon-button color="primary" (click)="openEditFinding(element.id)">
+                    <mat-icon aria-label="details">mode_edit</mat-icon>
+                  </button>
+                </span>
                 <span matTooltip="{{ 'Action Plans Access' | translate }}" [matTooltipPosition]="'above'">
-              <button mat-icon-button color="primary" >
-                <mat-icon aria-label="AP Access" >subject</mat-icon>
-              </button>
-            </span>
+                  <button mat-icon-button color="primary" >
+                    <mat-icon aria-label="AP Access" >subject</mat-icon>
+                  </button>
+                </span>
                 <span matTooltip="{{ 'Delete' | translate }}" [matTooltipPosition]="'above'">
-              <button mat-icon-button color="primary">
-                <mat-icon aria-label="Inspection Edition">delete</mat-icon>
-              </button>
-            </span>
+                  <button mat-icon-button color="primary" (click)="deleteFinding(element)">
+                    <mat-icon aria-label="Inspection Edition">delete</mat-icon>
+                  </button>
+                </span>
               </div>
             </mat-cell>
           </ng-container>

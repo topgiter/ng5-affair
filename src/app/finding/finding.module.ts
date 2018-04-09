@@ -11,6 +11,7 @@ import { FindingComponent } from './finding.component';
 import { FindingListComponent } from './list';
 import { FindingCreateDialogComponent } from './create';
 import { FindingEditDialogComponent } from './edit';
+import { FindingDeleteConfirmDialogComponent } from './list/finding.delete.confirm.dialog';
 
 // Services
 import { FindingService } from './finding.service';
@@ -49,10 +50,12 @@ import { MomentModule } from 'angular2-moment';
     FindingListComponent,
     FindingCreateDialogComponent,
     FindingEditDialogComponent,
+    FindingDeleteConfirmDialogComponent,
   ],
   entryComponents: [
     FindingCreateDialogComponent,
     FindingEditDialogComponent,
+    FindingDeleteConfirmDialogComponent,
   ],
   imports: [
     CommonModule,

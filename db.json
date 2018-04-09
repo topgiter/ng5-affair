@@ -1,19 +1,6 @@
 {
   "findings": [
     {
-      "id": "INS0000002FIN0001",
-      "supervisor": "BCB00034",
-      "title": "Título 1",
-      "description": "# 2 - Infraestrutura de TI para analisar e monitorar as exposições Para efetuar",
-      "riskType": "Credit Risk",
-      "criticality": "1",
-      "endDate": "2018-03-20",
-      "modifiedEndDate": "",
-      "endDateComments": "",
-      "geography": "Brasil",
-      "function": "Custódia Escrituração"
-    },
-    {
       "id": "INS0000002FIN0002",
       "supervisor": "BCB00035",
       "title": "Título 2",

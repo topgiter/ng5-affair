@@ -16,6 +16,7 @@ import { InspectionRelatedDialogComponent } from './related';
 
 // Services
 import { InspectionService } from './inspection.service';
+import { TranslatePipe } from '../services/translate.pipe';
 
 // Angular Material Modules
 import {
@@ -86,6 +87,7 @@ import { MomentModule } from 'angular2-moment';
   ],
   providers: [
     InspectionService,
+    TranslatePipe,
   ],
 })
 export class InspectionModule {

@@ -2,7 +2,8 @@ import {
   Component,
   ViewChild,
   AfterViewInit,
-  OnInit
+  OnInit,
+  DoCheck
 } from '@angular/core';
 
 import {
@@ -18,6 +19,7 @@ import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { User } from '../User';
 import { UsersService } from '../users.service';
 import { UserDeleteConfirmDialogComponent } from './user.delete.confirm.dialog';
+import { TranslatePipe } from '../../services/translate.pipe';
 
 /**
  * @title Table with sorting
@@ -27,7 +29,7 @@ import { UserDeleteConfirmDialogComponent } from './user.delete.confirm.dialog';
   styleUrls: ['users.list.component.scss'],
   templateUrl: 'users.list.component.html',
 })
-export class UsersListComponent implements AfterViewInit, OnInit {
+export class UsersListComponent implements AfterViewInit, OnInit, DoCheck {
   public showResult: boolean = true;
   public identifier: string = null;
   public name: string = null;
@@ -57,6 +59,7 @@ export class UsersListComponent implements AfterViewInit, OnInit {
 
   constructor(
     private service: UsersService,
+    public translatePipe: TranslatePipe,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
   ) {}
@@ -80,6 +83,15 @@ export class UsersListComponent implements AfterViewInit, OnInit {
   public ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  public ngDoCheck() {
+    // Translate pagination buttons
+    this.paginator._intl.itemsPerPageLabel = this.translatePipe.transform('Items per page');
+    this.paginator._intl.firstPageLabel = this.translatePipe.transform('First page');
+    this.paginator._intl.nextPageLabel = this.translatePipe.transform('Next page');
+    this.paginator._intl.previousPageLabel = this.translatePipe.transform('Previous page');
+    this.paginator._intl.lastPageLabel = this.translatePipe.transform('Last page');
   }
 
   public toggleSearch() {

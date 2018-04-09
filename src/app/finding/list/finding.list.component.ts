@@ -16,6 +16,7 @@ import {
 
 import 'rxjs/add/operator/filter';
 
+import { FormControl } from '@angular/forms';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { Finding } from '../Finding';
 import { Inspection } from '../../inspection/Inspection';
@@ -23,7 +24,7 @@ import { FindingService } from '../finding.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindingCreateDialogComponent } from '../create';
 import { FindingEditDialogComponent } from '../edit';
-import { FormControl } from '@angular/forms';
+import { FindingDeleteConfirmDialogComponent } from '../../finding/list/finding.delete.confirm.dialog';
 
 import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
@@ -99,19 +100,6 @@ export class FindingListComponent implements AfterViewInit, OnInit {
       });
   }
 
-  public getInspectionAndFindings() {
-    this.service.getInspectionAndFindings(this.inspectionId).subscribe((results) => {
-      const inspection: any = results[0];
-      const findings: any = results[1];
-
-      this.inspection = inspection;
-
-      this.dataSource = new MatTableDataSource<Finding>(findings);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
-  }
-
   /**
    * Set the sort after the view init since this component will
    * be able to query its view for the initialized sort.
@@ -173,6 +161,29 @@ export class FindingListComponent implements AfterViewInit, OnInit {
     this.criticality = status;
   }
 
+  public getFindings() {
+    this.service
+      .getFindings(this.inspectionId)
+      .subscribe((findings: Finding[]) => {
+        this.dataSource = new MatTableDataSource<Finding>(findings);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
+  }
+
+  public getInspectionAndFindings() {
+    this.service.getInspectionAndFindings(this.inspectionId).subscribe((results) => {
+      const inspection: any = results[0];
+      const findings: any = results[1];
+
+      this.inspection = inspection;
+
+      this.dataSource = new MatTableDataSource<Finding>(findings);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
   public openCreateDialog() {
     const dialogRef = this.dialog.open(FindingCreateDialogComponent, {
       width: '70%',
@@ -181,13 +192,7 @@ export class FindingListComponent implements AfterViewInit, OnInit {
 
     dialogRef.afterClosed().subscribe((isUpdated) => {
       if (isUpdated) {
-        this.service
-          .getFindings(this.inspectionId)
-          .subscribe((findings: Finding[]) => {
-            this.dataSource = new MatTableDataSource<Finding>(findings);
-            this.dataSource.sort = this.sort;
-            this.dataSource.paginator = this.paginator;
-          });
+        this.getFindings();
       }
     });
   }
@@ -203,14 +208,29 @@ export class FindingListComponent implements AfterViewInit, OnInit {
 
     dialogRef.afterClosed().subscribe((isCreated) => {
       if (isCreated) {
-        this.service
-          .getFindings(this.inspectionId)
-          .subscribe((findings: Finding[]) => {
-            this.dataSource = new MatTableDataSource<Finding>(findings);
-            this.dataSource.sort = this.sort;
-            this.dataSource.paginator = this.paginator;
-          });
+        this.getFindings();
       }
+    });
+  }
+
+  public deleteFinding(finding) {
+    const dialogRef = this.dialog.open(FindingDeleteConfirmDialogComponent, {
+      data: { finding }
+    });
+
+    dialogRef.afterClosed().subscribe((isDelete) => {
+      if (isDelete) {
+        this.service.deleteFinding(finding.id).subscribe((res: any) => {
+          // Notify that finding was deleted successfully
+          this.snackBar.open('Finding was deleted successfully.', null, {
+            duration: 3000,
+          });
+
+          // Retrieve updated finding list
+          this.getFindings();
+        });
+      }
+
     });
   }
 

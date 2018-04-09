@@ -176,6 +176,18 @@
     }
   }
 
-
 }
+
+
+.finding-delete-confirm-dialog {
+  .mat-dialog-content {
+    padding: 0 36px;
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
 
