@@ -1,0 +1,70 @@
+<div class="ap-edit-dialog">
+  <h2 mat-dialog-title>
+    <mat-icon aria-label="Create">create</mat-icon>
+    <span>{{ 'Action Plan Edit' | translate }}</span>
+  </h2>
+  <div mat-dialog-content>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{ 'Action Plan Id' | translate }}" [(ngModel)]="apId"  disabled />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="{{'Supervisor ID' | translate}}" [(ngModel)]="supervisor" />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Responsable Function' | translate }}" [(value)]="responsableFunction" [formControl]="responsableFunctionControl" required>
+            <mat-option *ngFor="let item of responsalbeFunctionList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Implementation Status' | translate }}" [(value)]="implementationStatus" [formControl]="implementationStatusControl" required>
+            <mat-option *ngFor="let item of implementationStatusList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <input matInput [matDatepicker]="endDatePicker" placeholder="{{ 'End Date' | translate }}" [formControl]="endDate" required>
+          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="full-width">
+          <mat-select placeholder="{{ 'Degree of Implementation' | translate }}" [(value)]="degreeOfImplementation" [formControl]="degreeOfImplementationControl" required>
+            <mat-option *ngFor="let item of degreeOfImplementatioList" [value]="item">
+              {{ item | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col"></div>
+      <div class="col"></div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="{{ 'Details' | translate }}" [formControl]="detailsControl" [(ngModel)]="details" required></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button (click)="clear()">{{ 'Clear' | translate }}</button>
+    <button mat-raised-button (click)="close()">{{ 'Close' | translate }}</button>
+    <button mat-raised-button color="primary" (click)="update()" cdkFocusInitial>{{ 'Save' | translate }}</button>
+  </div>
+</div>

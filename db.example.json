@@ -1,18 +1,61 @@
 {
-  "findings": [
+  "actionPlans": [
     {
-      "id": "INS0000002FIN0001",
-      "supervisor": "BCB00034",
-      "title": "Título 1",
-      "description": "# 2 - Infraestrutura de TI para analisar e monitorar as exposições Para efetuar",
-      "riskType": "Credit Risk",
-      "criticality": "1",
-      "endDate": "2018-03-20",
-      "modifiedEndDate": "",
-      "endDateComments": "",
-      "geography": "Brasil",
-      "function": "Custódia Escrituração"
+      "id": "INS0000003FIN0001PA001",
+      "supervisor": "BDBPA000043",
+      "details": "Com base nos 6 emissores para os quais o Banco globalinc.png prestava serviços de escrituração de valores mobiliários no período da auditoria (com exceção do próprio Banco globalinc.png como emissor), selecionamos os 3 emissores relacionados a seguir e solicitamos os respectivos contratos de prestação de serviços de escrituração, com objetivo de avaliar se possuíam o conteúdo mínimo requerido pelo artigo 11 da Instrução CVM 543/2013:\n • Cia. Docas Imbituba;\n• Alfa Holdings S/A; e\n• Ômega Geração S/A.\nComo resultado, identificamos que o contrato celebrado com a Alfa Holdings S/A não apresentava o conteúdo requerido pelos incisos I e II do artigo 11 da Instrução CVM 543/2013.",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "On track",
+      "degreeOfImplementation": "50%",
+      "endDate": ""
     },
+    {
+      "id": "INS0000003FIN0002PA002",
+      "supervisor": "BDBPA000044",
+      "details": "Solicitamos ao Escriturador o relatório emitido por auditoria independente referente ao ano de 2015 de que trata o inciso II do artigo 29 da Instrução CVM 543/2013 e não foi apresentado.",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "Riesgo de Retraso",
+      "degreeOfImplementation": "25%",
+      "endDate": ""
+    },
+    {
+      "id": "INS0000003FIN0003PA003",
+      "supervisor": "BDBPA000045",
+      "details": "1.1. O Custodiante não apresentou a documentação cadastral dos 2 (13,3% do total analisado) clientes relacionados a seguir: Código Cliente\n1.107 K R Wilson And Lana L Wilson Family Trust\n1.108 Lana Legallet Wilson",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "Retrasado",
+      "degreeOfImplementation": "0%",
+      "endDate": "2013-03-22"
+    },
+    {
+      "id": "INS0000003FIN0004PA004",
+      "supervisor": "BDBPA000047",
+      "details": "1.3. Os contratos de custódia ou documentos equivalentes firmados entre os 3 (20% do total analisado) clientes relacionados a seguir e o Custodiante apresentam parcialmente o conteúdo requerido pelo item 37.2 do Regulamento de Operações da Câmara de Compensação, Liquidação e Gerenciamento de Riscos de Operações do Segmento BOVESPA e da Central Depositária de Ativos e pelo artigo 9º da Instrução CVM 542/2013. Código Cliente Itens não identificados",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "Riesgo de Retraso",
+      "degreeOfImplementation": "50%",
+      "endDate": ""
+    },
+    {
+      "id": "INS0000003FIN0005PA005",
+      "supervisor": "BDBPA000046",
+      "details": "1.2. O Custodiante não apresentou os contratos de custódia firmados com os 12 (80% do total analisado) clientes relacionados a seguir:",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "Completado",
+      "degreeOfImplementation": "50%",
+      "endDate": ""
+    },
+    {
+      "id": "INS0000003FIN0005PA006",
+      "supervisor": "BDBPA000048",
+      "details": "7.2. 03 sistemas (50% do total de sistemas avaliados2) sem trilha de auditoria para as seguintes transações:",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "On track",
+      "degreeOfImplementation": "50%",
+      "endDate": ""
+    }
+  ],
+  "findings": [
     {
       "id": "INS0000002FIN0002",
       "supervisor": "BCB00035",
@@ -47,7 +90,7 @@
       "riskType": "Regulatory",
       "criticality": "3",
       "endDate": "2018-02-21",
-      "modifiedEndDate": "15/08/2017",
+      "modifiedEndDate": "2017-08-15",
       "endDateComments": "Comentarios",
       "geography": "Brasil",
       "function": "Custódia Escrituração"
@@ -55,12 +98,14 @@
   ],
   "users": [
     {
-      "id": 1,
-      "identifier": "n27761",
       "name": "Application BankTrade",
-      "country": "ESPAÑA",
-      "group": "REGISTRO DE SOCIEDADES Y PARTICIPACIONES",
-      "profile": "Administrador"
+      "contry": "ESPAÑA",
+      "profile": "Risks",
+      "contact": true,
+      "id": 1,
+      "country": "Germany",
+      "department": "Tax Advice",
+      "group": "Tax Advice"
     },
     {
       "id": 2,
@@ -81,18 +126,11 @@
     {
       "id": 4,
       "identifier": "VOL_ADMIN_VOL",
-      "name": "Aplicacion BankTrade",
-      "country": "",
-      "group": "",
-      "profile": "Fondos"
-    },
-    {
-      "id": 5,
-      "identifier": "VOL_RES_RA",
-      "name": "Aplicacion BankTrade",
-      "country": "",
-      "group": "ALLFUNDS",
-      "profile": "Administrador"
+      "name": "wer2342342",
+      "country": "Spain",
+      "group": null,
+      "profile": null,
+      "contact": null
     },
     {
       "id": 6,
@@ -231,7 +269,9 @@
       "riskType": "Risco de Crédito",
       "status": "Closed",
       "reportDate": "2017-06-25",
-      "inspectionResult": null
+      "inspectionResult": null,
+      "startingDate": null,
+      "expectedEndDate": null
     },
     {
       "id": "INS0000003",
@@ -243,7 +283,9 @@
       "riskType": "Compliance and regulatory risk",
       "status": "Closed",
       "reportDate": "2016-04-22",
-      "inspectionResult": "2"
+      "inspectionResult": "2",
+      "startingDate": null,
+      "expectedEndDate": null
     },
     {
       "id": "INS0000004",
@@ -267,7 +309,10 @@
       "riskType": "Risco de Crédito",
       "status": "Closed",
       "reportDate": "2016-12-21",
-      "inspectionResult": "3"
+      "inspectionResult": "3",
+      "category": "IMI",
+      "startingDate": null,
+      "expectedEndDate": null
     },
     {
       "id": "INS0000006",
@@ -545,19 +590,23 @@
         "dateReport": "2018-03-20",
         "dateStart": "2018-03-20",
         "degreeLvl": 1,
-        "degreeProgress":"degreeProgresses/1",
+        "degreeProgress": "degreeProgresses/1",
         "feedback": "prueba",
         "hasFindings": true,
-        "linkReport":["/documents/1"],
+        "linkReport": [
+          "/documents/1"
+        ],
         "owner": "OWNERPRUEBA",
-        "result":"inspectionresults/1",
-        "risks":["/typesofrisks/1"],
+        "result": "inspectionresults/1",
+        "risks": [
+          "/typesofrisks/1"
+        ],
         "scope": "scopeprueba",
-        "status":"statuses/1",
+        "status": "statuses/1",
         "subtypeRisk": "Credit risk",
         "supervisionScope": "cosacosacosa",
-        "supervisoryAuthority":"supervisors/1",
-        "unitSubsidiary":"subsidiaries/54"
+        "supervisoryAuthority": "supervisors/1",
+        "unitSubsidiary": "subsidiaries/54"
       },
       "response": {
         "dateInspection": "2018-03-20T00:00:00.000+0000",
@@ -607,8 +656,8 @@
     },
     "division": {
       "model": {
-        "id":10,
-        "description":"ESTO ES UNA DIVISION DE PRUEBA"
+        "id": 10,
+        "description": "ESTO ES UNA DIVISION DE PRUEBA"
       },
       "response": {
         "description": "ESTO ES UNA DIVISION DE PRUEBA",
@@ -627,8 +676,8 @@
     },
     "degreeProgress": {
       "model": {
-        "id":8,
-        "description":"ESTO ES UN GRADO DE PRUEBA"
+        "id": 8,
+        "description": "ESTO ES UN GRADO DE PRUEBA"
       },
       "response": {
         "description": "ESTO ES UN GRADO DE PRUEBA",
@@ -647,7 +696,7 @@
     },
     "typeOfRisk": {
       "model": {
-        "id":13,
+        "id": 13,
         "typeCode": 5,
         "typeName": "Riesgo de prueba",
         "subTypeCode": 1,
@@ -678,10 +727,10 @@
     },
     "supervisor": {
       "model": {
-        "id":"349",
-        "description":"ES UN SUPERVISOR DE PRUEBA",
-        "startDate":"2018-05-30",
-        "endDate":"2018-12-10"
+        "id": "349",
+        "description": "ES UN SUPERVISOR DE PRUEBA",
+        "startDate": "2018-05-30",
+        "endDate": "2018-12-10"
       },
       "response": {
         "description": "ES UN SUPERVISOR DE PRUEBA",
@@ -705,9 +754,9 @@
     },
     "subsidiary": {
       "model": {
-        "id":"5246",
-        "cargabalCode":"8832",
-        "entityName":"SUBSIDIARIO DE PRUEBA"
+        "id": "5246",
+        "cargabalCode": "8832",
+        "entityName": "SUBSIDIARIO DE PRUEBA"
       },
       "response": {
         "cargabalCode": 8832,
@@ -727,8 +776,8 @@
     },
     "inspectionResult": {
       "model": {
-        "id":10,
-        "description":"InspectionResultDePrueba"
+        "id": 10,
+        "description": "InspectionResultDePrueba"
       },
       "response": {
         "description": "InspectionResultDePrueba",
@@ -747,8 +796,8 @@
     },
     "documentType": {
       "model": {
-        "id":"8",
-        "description":"DESCRIPCION DE PRUEBA"
+        "id": "8",
+        "description": "DESCRIPCION DE PRUEBA"
       },
       "response": {
         "description": "Annual Inspections",
@@ -779,9 +828,9 @@
     },
     "document": {
       "model": {
-        "id":2,
+        "id": 2,
         "docManagName": "DocPRUEBA",
-        "category":"http://localhost:8080/documentTypes/1",
+        "category": "http://localhost:8080/documentTypes/1",
         "subCategory": "SUBcategoriaPrueba",
         "from": "./",
         "owner": "OWNERPRUEBA",

@@ -283,11 +283,103 @@
                        [showFirstLastButtons]="true">
         </mat-paginator>
       </div>
+
     </mat-tab>
     <mat-tab label="{{ 'Action Plans' | translate }}">
-      <div class="action-plans-container">
-        Actions
+
+      <div class="finding-list-header">
+        <div>
+          <mat-icon aria-label="folder">
+            {{showAPResult ? 'folder_open' : 'search'}}
+          </mat-icon>
+        </div>
+        <div class="search-placeholder">
+          {{ (showAPResult ? 'Results of Action Plan' : 'Search for Action Plan') | translate }}
+        </div>
+        <button mat-raised-button class="search-btn" (click)="toggleAPSearch()">
+          {{ 'Search' | translate }}
+          <mat-icon aria-label="search">{{showAPResult ? 'add' : 'remove'}}</mat-icon>
+        </button>
       </div>
+
+      <div class="finding-list-download">
+        <button mat-button (click)="downloadAP()">
+          <mat-icon aria-label="download">file_download</mat-icon>
+          {{ 'Export' | translate }}
+        </button>
+      </div>
+
+      <div class="finding-list-container mat-elevation-z8">
+        <mat-table #apTable #apSort="matSort" [dataSource]="apDataSource" matSort>
+
+          <!-- Id Column -->
+          <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Action Plan Id' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+          </ng-container>
+          <!-- Supervisor Column -->
+          <ng-container matColumnDef="supervisor">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Supervisor Id' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.supervisor}} </mat-cell>
+          </ng-container>
+          <!-- Details Column -->
+          <ng-container matColumnDef="details">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="description"> {{ 'Details' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="description"> {{element.details}} </mat-cell>
+          </ng-container>
+          <!-- Responsable Function Column -->
+          <ng-container matColumnDef="responsableFunction">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Responsable Function' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.responsableFunction}} </mat-cell>
+          </ng-container>
+          <!-- Implementation Status Column -->
+          <ng-container matColumnDef="implementationStatus">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Implementation Status' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.implementationStatus}} </mat-cell>
+          </ng-container>
+          <!-- Degree Of Implementation Column -->
+          <ng-container matColumnDef="degreeOfImplementation">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Degree Of Implementation' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.degreeOfImplementation}} </mat-cell>
+          </ng-container>
+          <!-- End Date Column -->
+          <ng-container matColumnDef="endDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'End Date' | translate}}  </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.endDate ? (element.endDate | amParse:'YYYY-MM-DD' | amDateFormat: 'DD/MM/YYYY') : '' }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef class="actions"> {{ 'Actions' | translate }} </mat-header-cell>
+            <mat-cell *matCellDef="let element" class="actions">
+              <div class="action-group">
+                <span matTooltip="{{ 'Edit' | translate }}" [matTooltipPosition]="'above'">
+                  <button mat-icon-button color="primary" (click)="openEditAP(element.id)">
+                    <mat-icon aria-label="details">mode_edit</mat-icon>
+                  </button>
+                </span>
+                <span matTooltip="{{ 'Delete' | translate }}" [matTooltipPosition]="'above'">
+                  <button mat-icon-button color="primary" (click)="deleteAP(element)">
+                    <mat-icon aria-label="AP Delete">delete</mat-icon>
+                  </button>
+                </span>
+              </div>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedAPColumns"></mat-header-row>
+          <mat-row *matRowDef="let apRow; columns: displayedAPColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator #apPaginator
+                       [pageSize]="5"
+                       [pageSizeOptions]="[5, 10, 20]"
+                       [showFirstLastButtons]="true">
+        </mat-paginator>
+      </div>
+
     </mat-tab>
   </mat-tab-group>
 

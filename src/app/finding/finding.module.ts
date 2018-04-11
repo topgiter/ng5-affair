@@ -12,9 +12,12 @@ import { FindingListComponent } from './list';
 import { FindingCreateDialogComponent } from './create';
 import { FindingEditDialogComponent } from './edit';
 import { FindingDeleteConfirmDialogComponent } from './list/finding.delete.confirm.dialog';
+import { APDeleteConfirmDialogComponent } from './list/ap.delete.confirm.dialog';
+import { APEditDialogComponent } from './ap-edit';
 
 // Services
 import { FindingService } from './finding.service';
+import { TranslatePipe } from '../services/translate.pipe';
 
 // Angular Material Modules
 import {
@@ -51,11 +54,15 @@ import { MomentModule } from 'angular2-moment';
     FindingCreateDialogComponent,
     FindingEditDialogComponent,
     FindingDeleteConfirmDialogComponent,
+    APDeleteConfirmDialogComponent,
+    APEditDialogComponent,
   ],
   entryComponents: [
     FindingCreateDialogComponent,
     FindingEditDialogComponent,
     FindingDeleteConfirmDialogComponent,
+    APDeleteConfirmDialogComponent,
+    APEditDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -88,6 +95,7 @@ import { MomentModule } from 'angular2-moment';
   ],
   providers: [
     FindingService,
+    TranslatePipe,
   ],
 })
 export class FindingModule {

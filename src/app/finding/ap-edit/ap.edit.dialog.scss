@@ -1,0 +1,34 @@
+.ap-edit-dialog {
+  .mat-dialog-title {
+    mat-icon {
+      vertical-align: text-bottom;
+    }
+  }
+
+  .mat-dialog-content {
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+
+      .col {
+        flex: 1;
+        padding: 4px 16px;
+      }
+    }
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    button {
+      margin-left: 8px;
+      margin-right: 8px;
+    }
+  }
+}

@@ -2,14 +2,14 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'finding-delete-confirm-dialog',
-  templateUrl: 'finding.delete.confirm.dialog.html',
+  selector: 'ap-delete-confirm-dialog',
+  templateUrl: 'ap.delete.confirm.dialog.html',
   styleUrls: ['finding.list.component.scss'],
 })
-export class FindingDeleteConfirmDialogComponent {
+export class APDeleteConfirmDialogComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<FindingDeleteConfirmDialogComponent>,
+    public dialogRef: MatDialogRef<APDeleteConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 

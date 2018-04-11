@@ -3,6 +3,7 @@ import {
   ViewChild,
   AfterViewInit,
   OnInit,
+  DoCheck,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -19,12 +20,16 @@ import 'rxjs/add/operator/filter';
 import { FormControl } from '@angular/forms';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 import { Finding } from '../Finding';
+import { ActionPlan } from '../ActionPlan';
 import { Inspection } from '../../inspection/Inspection';
 import { FindingService } from '../finding.service';
+import { TranslatePipe } from '../../services/translate.pipe';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindingCreateDialogComponent } from '../create';
 import { FindingEditDialogComponent } from '../edit';
-import { FindingDeleteConfirmDialogComponent } from '../../finding/list/finding.delete.confirm.dialog';
+import { FindingDeleteConfirmDialogComponent } from './finding.delete.confirm.dialog';
+import { APDeleteConfirmDialogComponent } from './ap.delete.confirm.dialog';
+import { APEditDialogComponent } from '../ap-edit';
 
 import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
@@ -39,11 +44,12 @@ const moment = _rollupMoment || _moment;
   templateUrl: 'finding.list.component.html',
   encapsulation: ViewEncapsulation.None,
 })
-export class FindingListComponent implements AfterViewInit, OnInit {
+export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
   public inspectionId: string = null;
   public inspection: Inspection = null;
   public findings: Finding = null;
   public showResult: boolean = true;
+  public showAPResult: boolean = true;
 
   public findingId: string = null;
   public supervisor: string = null;
@@ -74,9 +80,18 @@ export class FindingListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) public sort: MatSort;
   @ViewChild(MatPaginator) public paginator: MatPaginator;
 
+  public apDataSource = new MatTableDataSource([]);
+  @ViewChild('apSort') public apSort: MatSort;
+  @ViewChild('apPaginator') public apPaginator: MatPaginator;
+
   public displayedColumns = [
     'id', 'supervisor', 'title', 'description', 'riskType', 'criticality', 'endDate',
     'modifiedEndDate', 'endDateComments', 'geography', 'functional', 'actions'
+  ];
+
+  public displayedAPColumns = [
+    'id', 'supervisor', 'details', 'responsableFunction', 'implementationStatus',
+    'degreeOfImplementation', 'endDate', 'actions'
   ];
 
   constructor(
@@ -85,6 +100,7 @@ export class FindingListComponent implements AfterViewInit, OnInit {
     public snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
+    public translatePipe: TranslatePipe,
   ) {}
 
   public ngOnInit() {
@@ -107,6 +123,23 @@ export class FindingListComponent implements AfterViewInit, OnInit {
   public ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.apDataSource.sort = this.apSort;
+    this.apDataSource.paginator = this.apPaginator;
+  }
+
+  public ngDoCheck() {
+    // Translate pagination buttons
+    this.paginator._intl.itemsPerPageLabel = this.translatePipe.transform('Items per page');
+    this.paginator._intl.firstPageLabel = this.translatePipe.transform('First page');
+    this.paginator._intl.nextPageLabel = this.translatePipe.transform('Next page');
+    this.paginator._intl.previousPageLabel = this.translatePipe.transform('Previous page');
+    this.paginator._intl.lastPageLabel = this.translatePipe.transform('Last page');
+
+    this.apPaginator._intl.itemsPerPageLabel = this.translatePipe.transform('Items per page');
+    this.apPaginator._intl.firstPageLabel = this.translatePipe.transform('First page');
+    this.apPaginator._intl.nextPageLabel = this.translatePipe.transform('Next page');
+    this.apPaginator._intl.previousPageLabel = this.translatePipe.transform('Previous page');
+    this.apPaginator._intl.lastPageLabel = this.translatePipe.transform('Last page');
   }
 
   public toggleSearch() {
@@ -157,6 +190,18 @@ export class FindingListComponent implements AfterViewInit, OnInit {
       });
   }
 
+  public toggleAPSearch() {
+    this.showAPResult = !this.showAPResult;
+
+    if (this.showAPResult) {
+      this.searchAP();
+    }
+  }
+
+  public searchAP() {
+    // TODO: Search Action Plan
+  }
+
   public updateCriticality(status) {
     this.criticality = status;
   }
@@ -171,16 +216,31 @@ export class FindingListComponent implements AfterViewInit, OnInit {
       });
   }
 
+  public getActionPlans() {
+    this.service
+      .getActionPlans(this.inspectionId)
+      .subscribe((actionPlans: ActionPlan[]) => {
+        this.apDataSource = new MatTableDataSource<ActionPlan>(actionPlans);
+        this.apDataSource.sort = this.apSort;
+        this.apDataSource.paginator = this.apPaginator;
+      });
+  }
+
   public getInspectionAndFindings() {
     this.service.getInspectionAndFindings(this.inspectionId).subscribe((results) => {
       const inspection: any = results[0];
       const findings: any = results[1];
+      const actionPlans: any = results[2];
 
       this.inspection = inspection;
 
       this.dataSource = new MatTableDataSource<Finding>(findings);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+
+      this.apDataSource = new MatTableDataSource<ActionPlan>(actionPlans);
+      this.apDataSource.sort = this.apSort;
+      this.apDataSource.paginator = this.apPaginator;
     });
   }
 
@@ -197,18 +257,34 @@ export class FindingListComponent implements AfterViewInit, OnInit {
     });
   }
 
-  public openEditFinding(findingId) {
+  public openEditFinding(id) {
     const dialogRef = this.dialog.open(FindingEditDialogComponent, {
       width: '70%',
       data: {
         inspectionId: this.inspectionId,
-        findingId: findingId
+        findingId: id
       }
     });
 
     dialogRef.afterClosed().subscribe((isCreated) => {
       if (isCreated) {
         this.getFindings();
+      }
+    });
+  }
+
+  public openEditAP(id) {
+    const dialogRef = this.dialog.open(APEditDialogComponent, {
+      width: '70%',
+      data: {
+        inspectionId: this.inspectionId,
+        apId: id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((isCreated) => {
+      if (isCreated) {
+        this.getActionPlans();
       }
     });
   }
@@ -234,6 +310,27 @@ export class FindingListComponent implements AfterViewInit, OnInit {
     });
   }
 
+  public deleteAP(actionPlan) {
+    const dialogRef = this.dialog.open(APDeleteConfirmDialogComponent, {
+      data: { actionPlan }
+    });
+
+    dialogRef.afterClosed().subscribe((isDelete) => {
+      if (isDelete) {
+        this.service.deleteActionPlan(actionPlan.id).subscribe((res: any) => {
+          // Notify that finding was deleted successfully
+          this.snackBar.open('Action Plan was deleted successfully.', null, {
+            duration: 3000,
+          });
+
+          // Retrieve updated finding list
+          this.getActionPlans();
+        });
+      }
+
+    });
+  }
+
   public downloadFindings() {
     const options = {
       fieldSeparator: ',',
@@ -244,7 +341,7 @@ export class FindingListComponent implements AfterViewInit, OnInit {
       useBom: true,
       noDownload: false,
       headers: [
-        'Id', 'Supervisor ID', 'Title', 'Description', 'Risk Type', 'Criticality',
+        'ID', 'Supervisor ID', 'Title', 'Description', 'Risk Type', 'Criticality',
         'End Date', 'Modified End Date', 'End Date Comments', 'Geography', 'Function'
       ]
     };
@@ -260,5 +357,33 @@ export class FindingListComponent implements AfterViewInit, OnInit {
     });
 
     const csv = new Angular5Csv(exportData, 'Findings', options);
+  }
+
+  public downloadAP() {
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      showTitle: false,
+      useBom: true,
+      noDownload: false,
+      headers: [
+        'Id', 'Supervisor ID', 'Details', 'Responsable Function', 'Implementation Status',
+        'Degree Of Implementation', 'End Date'
+      ]
+    };
+
+    const exportData = this.apDataSource.filteredData.map((d: ActionPlan) => {
+      const {
+        id, supervisor, details, responsableFunction, implementationStatus,
+        degreeOfImplementation, endDate
+      } = d;
+
+      return { id, supervisor, details, responsableFunction, implementationStatus,
+        degreeOfImplementation, endDate };
+    });
+
+    const csv = new Angular5Csv(exportData, 'Action Plans', options);
   }
 }

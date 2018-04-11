@@ -1,4 +1,60 @@
 {
+  "actionPlans": [
+    {
+      "supervisor": "BDBPA000043",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "On track",
+      "degreeOfImplementation": "25%",
+      "details": "Com base nos 6 emissores para os quais o Banco globalinc.png prestava serviços de escrituração de valores mobiliários no período da auditoria (com exceção do próprio Banco globalinc.png como emissor), selecionamos os 3 emissores relacionados a seguir e solicitamos os respectivos contratos de prestação de serviços de escrituração, com objetivo de avaliar se possuíam o conteúdo mínimo requerido pelo artigo 11 da Instrução CVM 543/2013:\n • Cia. Docas Imbituba;\n• Alfa Holdings S/A; e\n• Ômega Geração S/A.\nComo resultado, identificamos que o contrato celebrado com a Alfa Holdings S/A não apresentava o conteúdo requerido pelos incisos I e II do artigo 11 da Instrução CVM 543/2013.",
+      "endDate": "2018-04-11",
+      "id": "INS0000003FIN0001PA001"
+    },
+    {
+      "supervisor": "BDBPA000070",
+      "responsableFunction": "function - 1",
+      "implementationStatus": "Riesgo de Retraso",
+      "degreeOfImplementation": "25%",
+      "details": " ao Escriturador o relatório emitido por auditoria independente referente ao ano de 2015 de que trata o inciso II do artigo 29 da Instrução CVM 543/2013 e não foi apresentado.",
+      "endDate": null,
+      "id": "INS0000003FIN0002PA002"
+    },
+    {
+      "id": "INS0000003FIN0003PA003",
+      "supervisor": "BDBPA000045",
+      "details": "1.1. O Custodiante não apresentou a documentação cadastral dos 2 (13,3% do total analisado) clientes relacionados a seguir: Código Cliente\n1.107 K R Wilson And Lana L Wilson Family Trust\n1.108 Lana Legallet Wilson",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "Retrasado",
+      "degreeOfImplementation": "0%",
+      "endDate": "2013-03-22"
+    },
+    {
+      "id": "INS0000003FIN0004PA004",
+      "supervisor": "BDBPA000047",
+      "details": "1.3. Os contratos de custódia ou documentos equivalentes firmados entre os 3 (20% do total analisado) clientes relacionados a seguir e o Custodiante apresentam parcialmente o conteúdo requerido pelo item 37.2 do Regulamento de Operações da Câmara de Compensação, Liquidação e Gerenciamento de Riscos de Operações do Segmento BOVESPA e da Central Depositária de Ativos e pelo artigo 9º da Instrução CVM 542/2013. Código Cliente Itens não identificados",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "Riesgo de Retraso",
+      "degreeOfImplementation": "50%",
+      "endDate": ""
+    },
+    {
+      "id": "INS0000003FIN0005PA005",
+      "supervisor": "BDBPA000046",
+      "details": "1.2. O Custodiante não apresentou os contratos de custódia firmados com os 12 (80% do total analisado) clientes relacionados a seguir:",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "Completado",
+      "degreeOfImplementation": "50%",
+      "endDate": ""
+    },
+    {
+      "id": "INS0000003FIN0005PA006",
+      "supervisor": "BDBPA000048",
+      "details": "7.2. 03 sistemas (50% do total de sistemas avaliados2) sem trilha de auditoria para as seguintes transações:",
+      "responsableFunction": "Custódia Escrituração",
+      "implementationStatus": "On track",
+      "degreeOfImplementation": "50%",
+      "endDate": ""
+    }
+  ],
   "findings": [
     {
       "id": "INS0000002FIN0002",
@@ -34,7 +90,7 @@
       "riskType": "Regulatory",
       "criticality": "3",
       "endDate": "2018-02-21",
-      "modifiedEndDate": "15/08/2017",
+      "modifiedEndDate": "2017-08-15",
       "endDateComments": "Comentarios",
       "geography": "Brasil",
       "function": "Custódia Escrituração"
