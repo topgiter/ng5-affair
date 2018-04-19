@@ -130,6 +130,22 @@ export class FindingService {
       });
   }
 
+  public searchActionPlan(params) {
+    const uri = this.apiUrl + '/actionPlans';
+    let searchParams = new HttpParams();
+
+    Object.keys(params).forEach((key) => {
+      searchParams = searchParams.append(key, params[key]);
+    });
+
+    return this
+      .http
+      .get(uri, { params })
+      .map((res: ActionPlan[]) => {
+        return res;
+      });
+  }
+
   public getInspectionAndFindings(inspectionId) {
     const inspection = this.http.get(this.apiUrl + '/inspections/' + inspectionId);
     const findings = this.http.get(this.apiUrl + '/findings');

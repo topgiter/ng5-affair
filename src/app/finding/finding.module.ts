@@ -39,6 +39,7 @@ import {
   MatExpansionModule,
   MatSnackBarModule,
   MatTabsModule,
+  MatToolbarModule,
 } from '@angular/material';
 
 import { MomentModule } from 'angular2-moment';
@@ -88,6 +89,7 @@ import { MomentModule } from 'angular2-moment';
     MatExpansionModule,
     MatSnackBarModule,
     MatTabsModule,
+    MatToolbarModule,
 
     MomentModule,
 

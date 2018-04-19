@@ -50,8 +50,11 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
   public findings: Finding = null;
   public showResult: boolean = true;
   public showAPResult: boolean = true;
+  public showRelatedAP: boolean = false;
 
   public findingId: string = null;
+  public selectedFindingId: string = null;
+  public selectedAPId: string = null;
   public supervisor: string = null;
   public riskType: string = null;
   public criticality: string = null;
@@ -62,6 +65,24 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
   public title: string = null;
   public description: string = null;
   public endDateComments: string = null;
+
+  public apId: string;
+  public apSupervisor: string = null;
+  public apEndDate = new FormControl(null);
+  public apDetails: string = null;
+  public apResponsableFunction: string = null;
+  public apImplementationStatus: string = null;
+  public apDegreeOfImplementation: string = null;
+
+  public apImplementationStatusList: string[] = [
+    'On track', 'Riesgo de Retraso', 'Retrasado', 'Cerrado'
+  ];
+  public apDegreeOfImplementatioList: string[] = [
+    '0%', '25%', '50%', '75%', '100%'
+  ];
+  public apResponsalbeFunctionList: string[] = [
+    'Custódia Escrituração', 'function - 1', 'function -2'
+  ];
 
   public riskTypeList: string[] = [
     'Credit Risk', 'Regulatory'
@@ -83,6 +104,12 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
   public apDataSource = new MatTableDataSource([]);
   @ViewChild('apSort') public apSort: MatSort;
   @ViewChild('apPaginator') public apPaginator: MatPaginator;
+
+  public selectedDataSource = new MatTableDataSource([]);
+  @ViewChild('selectedSort') public selectedSort: MatSort;
+
+  public selectedAPDataSource = new MatTableDataSource([]);
+  @ViewChild('selectedAPSort') public selectedAPSort: MatSort;
 
   public displayedColumns = [
     'id', 'supervisor', 'title', 'description', 'riskType', 'criticality', 'endDate',
@@ -114,6 +141,7 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
           this.router.navigate(['inspection/list']);
         }
       });
+
   }
 
   /**
@@ -129,11 +157,14 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
 
   public ngDoCheck() {
     // Translate pagination buttons
-    this.paginator._intl.itemsPerPageLabel = this.translatePipe.transform('Items per page');
-    this.paginator._intl.firstPageLabel = this.translatePipe.transform('First page');
-    this.paginator._intl.nextPageLabel = this.translatePipe.transform('Next page');
-    this.paginator._intl.previousPageLabel = this.translatePipe.transform('Previous page');
-    this.paginator._intl.lastPageLabel = this.translatePipe.transform('Last page');
+
+    if (this.paginator) {
+      this.paginator._intl.itemsPerPageLabel = this.translatePipe.transform('Items per page');
+      this.paginator._intl.firstPageLabel = this.translatePipe.transform('First page');
+      this.paginator._intl.nextPageLabel = this.translatePipe.transform('Next page');
+      this.paginator._intl.previousPageLabel = this.translatePipe.transform('Previous page');
+      this.paginator._intl.lastPageLabel = this.translatePipe.transform('Last page');
+    }
 
     this.apPaginator._intl.itemsPerPageLabel = this.translatePipe.transform('Items per page');
     this.apPaginator._intl.firstPageLabel = this.translatePipe.transform('First page');
@@ -199,7 +230,37 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
   }
 
   public searchAP() {
-    // TODO: Search Action Plan
+    const params: any = {};
+
+    if (this.apId) {
+      params.id = this.apId;
+    }
+    if (this.apSupervisor) {
+      params.supervisor = this.apSupervisor;
+    }
+    if (this.apResponsableFunction) {
+      params.responsableFunction = this.apResponsableFunction;
+    }
+    if (this.apEndDate.value) {
+      params.endDate = moment(this.apEndDate.value).format('YYYY-MM-DD');
+    }
+    if (this.apImplementationStatus) {
+      params.implementationStatus = this.apImplementationStatus;
+    }
+    if (this.apDegreeOfImplementation) {
+      params.degreeOfImplementation = this.apDegreeOfImplementation;
+    }
+    if (this.apDetails) {
+      params.details = this.apDetails;
+    }
+
+    this.service
+      .searchActionPlan(params)
+      .subscribe((actionPlans: ActionPlan[]) => {
+        this.apDataSource = new MatTableDataSource<ActionPlan>(actionPlans);
+        this.apDataSource.sort = this.apSort;
+        this.apDataSource.paginator = this.apPaginator;
+      });
   }
 
   public updateCriticality(status) {
@@ -213,6 +274,13 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
         this.dataSource = new MatTableDataSource<Finding>(findings);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+
+        if (this.showRelatedAP && this.selectedFindingId) {
+          const selected: Finding = findings.find((f: Finding) => f.id === this.selectedFindingId);
+          const data = selected ? [selected] : [];
+          this.selectedDataSource = new MatTableDataSource<Finding>(data);
+          this.selectedDataSource.sort = this.selectedSort;
+        }
       });
   }
 
@@ -223,6 +291,13 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
         this.apDataSource = new MatTableDataSource<ActionPlan>(actionPlans);
         this.apDataSource.sort = this.apSort;
         this.apDataSource.paginator = this.apPaginator;
+
+        if (this.showRelatedAP && this.selectedAPId) {
+          const selectedAP: ActionPlan = actionPlans.find((ap: ActionPlan) => ap.id === this.selectedAPId);
+          const apData = selectedAP ? [selectedAP] : [];
+          this.selectedAPDataSource = new MatTableDataSource<any>(apData);
+          this.selectedAPDataSource.sort = this.selectedAPSort;
+        }
       });
   }
 
@@ -287,6 +362,26 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
         this.getActionPlans();
       }
     });
+  }
+
+  public openRelatedAP(findingId) {
+    this.showRelatedAP = true;
+    this.selectedFindingId = findingId;
+
+    const selected: Finding = this.dataSource.data.find((f: Finding) => f.id === findingId);
+    const data: Finding[] = selected ? [selected] : [];
+    this.selectedDataSource = new MatTableDataSource<Finding>(data);
+    this.selectedDataSource.sort = this.selectedSort;
+
+    this.selectedAPId = selected.actionPlanId;
+    const selectedAP: ActionPlan = this.apDataSource.data.find((ap: ActionPlan) => ap.id === this.selectedAPId);
+    const apData: ActionPlan[] = selectedAP ? [selectedAP] : []
+    this.selectedAPDataSource = new MatTableDataSource<ActionPlan>(apData);
+    this.selectedAPDataSource.sort = this.selectedAPSort;
+  }
+
+  public closeRelatedAP() {
+    this.showRelatedAP = false;
   }
 
   public deleteFinding(finding) {

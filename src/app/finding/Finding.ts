@@ -10,4 +10,5 @@ export interface Finding {
   endDateComments: string;
   geography: string;
   functional: string;
+  actionPlanId: string;
 }
