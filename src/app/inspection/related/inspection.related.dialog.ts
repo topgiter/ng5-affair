@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+import { LoaderService } from '../../loader/loader.service';
 
 import { InspectionService } from '../inspection.service';
 import { Document } from '../Document';
@@ -14,20 +14,28 @@ import { Document } from '../Document';
 export class InspectionRelatedDialogComponent implements OnInit {
   public documents: Document[] = [];
 
-  constructor(public dialogRef: MatDialogRef<InspectionRelatedDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              public service: InspectionService) { }
+  constructor(
+    public dialogRef: MatDialogRef<InspectionRelatedDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public service: InspectionService,
+    private loader: LoaderService,
+  ) { }
 
   public ngOnInit() {
     this.getDocuments();
   }
 
   public getDocuments() {
+    this.loader.show();
+
     this.service
       .getRelatedDocuments(this.data.inspection.id)
       .subscribe((docs: Document[]) => {
         this.documents = docs;
-        console.log(docs);
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 

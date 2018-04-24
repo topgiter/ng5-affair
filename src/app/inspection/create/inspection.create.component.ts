@@ -6,6 +6,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Inspection } from '../Inspection';
 import { InspectionService } from '../inspection.service';
+import { LoaderService } from '../../loader/loader.service';
 
 import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
@@ -61,6 +62,7 @@ export class InspectionCreateComponent implements OnInit {
     private router: Router,
     private service: InspectionService,
     private snackBar: MatSnackBar,
+    private loader: LoaderService,
   ) { }
 
   public ngOnInit() {
@@ -88,6 +90,8 @@ export class InspectionCreateComponent implements OnInit {
       ? moment(this.expectedEndDate.value).format('YYYY-MM-DD')
       : null;
 
+    this.loader.show();
+
     this.service
       .createInspection(inspection)
       .subscribe((res: Inspection) => {
@@ -95,9 +99,17 @@ export class InspectionCreateComponent implements OnInit {
           duration: 2000,
         });
 
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
+
         this.router.navigate(['inspection/list']);
       }, (error) => {
         console.log('Error', error);
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
 
         this.snackBar.open('Error occurred unexpectedly', null, {
           duration: 1500,

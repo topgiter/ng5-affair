@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { User } from '../User';
 import { UsersService } from '../users.service';
+import { LoaderService } from '../../loader/loader.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
@@ -36,6 +37,7 @@ export class UsersEditComponent implements OnInit {
     private router: Router,
     private service: UsersService,
     private snackBar: MatSnackBar,
+    private loader: LoaderService,
   ) { }
 
   public ngOnInit() {
@@ -46,6 +48,8 @@ export class UsersEditComponent implements OnInit {
   }
 
   public getUser() {
+    this.loader.show();
+
     this.service.getUser(this.userId).subscribe((user: User) => {
       this.user = user;
       this.name = user.name;
@@ -53,6 +57,10 @@ export class UsersEditComponent implements OnInit {
       this.group = user.group;
       this.profile = user.profile;
       this.contact = user.contact;
+
+      setTimeout(() => {
+        this.loader.hide();
+      }, 512);
     });
   }
 
@@ -75,6 +83,8 @@ export class UsersEditComponent implements OnInit {
     user.profile = this.profile;
     user.contact = this.contact;
 
+    this.loader.show();
+
     // Update user
     this.service
       .updateUser(this.userId, user)
@@ -83,10 +93,18 @@ export class UsersEditComponent implements OnInit {
           duration: 2000,
         });
 
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
+
         // Navigate to users list
         this.router.navigate(['users/list']);
       }, (error) => {
         console.log('Error', error);
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
 
         this.snackBar.open('Error occurred unexpectedly', null, {
           duration: 1500,

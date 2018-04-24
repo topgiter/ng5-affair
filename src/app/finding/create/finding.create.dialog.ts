@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { FindingService } from '../finding.service';
+import { LoaderService } from '../../loader/loader.service';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Finding } from '../Finding';
@@ -70,6 +71,7 @@ export class FindingCreateDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public service: FindingService,
     private snackBar: MatSnackBar,
+    private loader: LoaderService,
   ) { }
 
   public ngOnInit() {
@@ -125,6 +127,8 @@ export class FindingCreateDialogComponent implements OnInit {
     finding.description = this.description;
     finding.endDateComments = this.endDateComments;
 
+    this.loader.show();
+
     this.service
       .createFinding(finding)
       .subscribe((res: Finding) => {
@@ -132,9 +136,17 @@ export class FindingCreateDialogComponent implements OnInit {
           duration: 2000,
         });
 
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
+
         this.dialogRef.close(true);
       }, (error) => {
         console.log('Error', error);
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
 
         this.snackBar.open('Error occurred unexpectedly', null, {
           duration: 1500,

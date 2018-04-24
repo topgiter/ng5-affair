@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 
 import { User } from '../User';
 import { UsersService } from '../users.service';
+import { LoaderService } from '../../loader/loader.service';
 
 @Component({
   selector: 'users-create-page',
@@ -38,6 +39,7 @@ export class UsersCreateComponent implements OnInit {
     private router: Router,
     private service: UsersService,
     private snackBar: MatSnackBar,
+    private loader: LoaderService,
   ) { }
 
   public ngOnInit() {
@@ -64,12 +66,18 @@ export class UsersCreateComponent implements OnInit {
     user.entity = this.entity;
     user.location = this.location;
 
+    this.loader.show();
+
     this.service
       .createUser(user)
       .subscribe((res: User) => {
         this.snackBar.open('Crated a user "' + res.name + '" successfully', null, {
           duration: 2000,
         });
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
 
         this.router.navigate(['users/list']);
       }, (error) => {
@@ -78,6 +86,10 @@ export class UsersCreateComponent implements OnInit {
         this.snackBar.open('Error occurred unexpectedly', null, {
           duration: 1500,
         });
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 

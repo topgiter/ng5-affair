@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from './services/shared.module';
+import { LoaderModule } from './loader/loader.module';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -61,6 +62,7 @@ const APP_PROVIDERS = [
     FormsModule,
     HttpClientModule,
     SharedModule,
+    LoaderModule,
 
     // Material modules
     MatToolbarModule,

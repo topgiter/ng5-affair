@@ -23,6 +23,7 @@ import { Finding } from '../Finding';
 import { ActionPlan } from '../ActionPlan';
 import { Inspection } from '../../inspection/Inspection';
 import { FindingService } from '../finding.service';
+import { LoaderService } from '../../loader/loader.service';
 import { TranslatePipe } from '../../services/translate.pipe';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindingCreateDialogComponent } from '../create';
@@ -128,6 +129,7 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
     private route: ActivatedRoute,
     private router: Router,
     public translatePipe: TranslatePipe,
+    private loader: LoaderService,
   ) {}
 
   public ngOnInit() {
@@ -212,12 +214,17 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
       params.title = this.title;
     }
 
+    this.loader.show();
     this.service
       .searchFinding(params)
       .subscribe((findings: Finding[]) => {
         this.dataSource = new MatTableDataSource<Finding>(findings);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 
@@ -254,12 +261,18 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
       params.details = this.apDetails;
     }
 
+    this.loader.show();
+
     this.service
       .searchActionPlan(params)
       .subscribe((actionPlans: ActionPlan[]) => {
         this.apDataSource = new MatTableDataSource<ActionPlan>(actionPlans);
         this.apDataSource.sort = this.apSort;
         this.apDataSource.paginator = this.apPaginator;
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 
@@ -268,6 +281,8 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
   }
 
   public getFindings() {
+    this.loader.show();
+
     this.service
       .getFindings(this.inspectionId)
       .subscribe((findings: Finding[]) => {
@@ -281,10 +296,16 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
           this.selectedDataSource = new MatTableDataSource<Finding>(data);
           this.selectedDataSource.sort = this.selectedSort;
         }
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 
   public getActionPlans() {
+    this.loader.show();
+
     this.service
       .getActionPlans(this.inspectionId)
       .subscribe((actionPlans: ActionPlan[]) => {
@@ -298,10 +319,16 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
           this.selectedAPDataSource = new MatTableDataSource<any>(apData);
           this.selectedAPDataSource.sort = this.selectedAPSort;
         }
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 
   public getInspectionAndFindings() {
+    this.loader.show();
+
     this.service.getInspectionAndFindings(this.inspectionId).subscribe((results) => {
       const inspection: any = results[0];
       const findings: any = results[1];
@@ -316,6 +343,10 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
       this.apDataSource = new MatTableDataSource<ActionPlan>(actionPlans);
       this.apDataSource.sort = this.apSort;
       this.apDataSource.paginator = this.apPaginator;
+
+      setTimeout(() => {
+        this.loader.hide();
+      }, 512);
     });
   }
 
@@ -391,12 +422,15 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
 
     dialogRef.afterClosed().subscribe((isDelete) => {
       if (isDelete) {
+        this.loader.show();
+
         this.service.deleteFinding(finding.id).subscribe((res: any) => {
           // Notify that finding was deleted successfully
           this.snackBar.open('Finding was deleted successfully.', null, {
             duration: 3000,
           });
 
+          this.loader.hide();
           // Retrieve updated finding list
           this.getFindings();
         });
@@ -412,12 +446,15 @@ export class FindingListComponent implements AfterViewInit, OnInit, DoCheck {
 
     dialogRef.afterClosed().subscribe((isDelete) => {
       if (isDelete) {
+        this.loader.show();
+
         this.service.deleteActionPlan(actionPlan.id).subscribe((res: any) => {
           // Notify that finding was deleted successfully
           this.snackBar.open('Action Plan was deleted successfully.', null, {
             duration: 3000,
           });
 
+          this.loader.hide();
           // Retrieve updated finding list
           this.getActionPlans();
         });

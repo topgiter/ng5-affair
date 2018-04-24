@@ -18,6 +18,7 @@ import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 
 import { User } from '../User';
 import { UsersService } from '../users.service';
+import { LoaderService } from '../../loader/loader.service';
 import { UserDeleteConfirmDialogComponent } from './user.delete.confirm.dialog';
 import { TranslatePipe } from '../../services/translate.pipe';
 
@@ -62,6 +63,7 @@ export class UsersListComponent implements AfterViewInit, OnInit, DoCheck {
     public translatePipe: TranslatePipe,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
+    private loader: LoaderService,
   ) {}
 
   public ngOnInit() {
@@ -69,10 +71,16 @@ export class UsersListComponent implements AfterViewInit, OnInit, DoCheck {
   }
 
   public getUsers() {
+    this.loader.show();
+
     this.service.getUsers().subscribe((res: User[]) => {
       this.dataSource = new MatTableDataSource<User>(res);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+
+      setTimeout(() => {
+        this.loader.hide();
+      }, 512);
     });
   }
 
@@ -127,12 +135,18 @@ export class UsersListComponent implements AfterViewInit, OnInit, DoCheck {
       params.contact = this.contact;
     }
 
+    this.loader.show();
+
     this.service
       .searchUser(params)
       .subscribe((users: User[]) => {
         this.dataSource = new MatTableDataSource<User>(users);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 
@@ -143,11 +157,15 @@ export class UsersListComponent implements AfterViewInit, OnInit, DoCheck {
 
     dialogRef.afterClosed().subscribe((isDelete) => {
       if (isDelete) {
+
+        this.loader.show();
         this.service.deleteUser(user.id).subscribe((res: any) => {
           // Notify that user was deleted successfully
           this.snackBar.open('User "' + user.name + '" was deleted successfully.', null, {
             duration: 3000,
           });
+
+          this.loader.hide();
 
           // Retrieve updated users list
           this.getUsers();

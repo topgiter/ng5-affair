@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { FindingService } from '../finding.service';
+import { LoaderService } from '../../loader/loader.service';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Finding } from '../Finding';
@@ -71,6 +72,7 @@ export class FindingEditDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public service: FindingService,
     private snackBar: MatSnackBar,
+    private loader: LoaderService,
   ) { }
 
   public ngOnInit() {
@@ -79,6 +81,8 @@ export class FindingEditDialogComponent implements OnInit {
   }
 
   public getFinding() {
+    this.loader.show();
+
     this.service
       .getFinding(this.findingId)
       .subscribe((finding: Finding) => {
@@ -86,12 +90,18 @@ export class FindingEditDialogComponent implements OnInit {
         this.riskType = finding.riskType;
         this.criticality = finding.criticality;
         this.endDate = finding.endDate ? new FormControl(moment(finding.endDate)) : new FormControl(null);
-        this.modifiedEndDate = finding.modifiedEndDate ? new FormControl(moment(finding.modifiedEndDate)) : new FormControl(null);
+        this.modifiedEndDate = finding.modifiedEndDate
+          ? new FormControl(moment(finding.modifiedEndDate))
+          : new FormControl(null);
         this.geography = finding.geography;
         this.functional = finding.functional;
         this.title = finding.title;
         this.description = finding.description;
         this.endDateComments = finding.endDateComments;
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 
@@ -144,6 +154,8 @@ export class FindingEditDialogComponent implements OnInit {
     finding.description = this.description;
     finding.endDateComments = this.endDateComments;
 
+    this.loader.show();
+
     this.service
       .updateFinding(this.findingId, finding)
       .subscribe((res: Finding) => {
@@ -151,9 +163,17 @@ export class FindingEditDialogComponent implements OnInit {
           duration: 2000,
         });
 
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
+
         this.dialogRef.close(true);
       }, (error) => {
         console.log('Error', error);
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
 
         this.snackBar.open('Error occurred unexpectedly', null, {
           duration: 1500,

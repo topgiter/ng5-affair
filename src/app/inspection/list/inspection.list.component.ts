@@ -7,6 +7,7 @@ import { InspectionRelatedDialogComponent } from '../related';
 import { Inspection } from '../Inspection';
 import { InspectionService } from '../inspection.service';
 import { TranslatePipe } from '../../services/translate.pipe';
+import { LoaderService } from '../../loader/loader.service';
 import { FormControl } from '@angular/forms';
 
 import * as _moment from 'moment';
@@ -63,7 +64,8 @@ export class InspectionListComponent implements AfterViewInit, OnInit, DoCheck {
   constructor(
     private service: InspectionService,
     private translatePipe: TranslatePipe,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private loader: LoaderService,
   ) {}
 
   public ngOnInit() {
@@ -71,10 +73,17 @@ export class InspectionListComponent implements AfterViewInit, OnInit, DoCheck {
   }
 
   public getInspections() {
+    this.loader.show();
+
     this.service.getInspections().subscribe((res: Inspection[]) => {
       this.dataSource = new MatTableDataSource<Inspection>(res);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+
+      setTimeout(() => {
+        this.loader.hide();
+      }, 512);
+
     });
   }
 
@@ -146,12 +155,17 @@ export class InspectionListComponent implements AfterViewInit, OnInit, DoCheck {
       params.status = this.status;
     }
 
+    this.loader.show();
     this.service
       .searchInspection(params)
       .subscribe((inspections: Inspection[]) => {
         this.dataSource = new MatTableDataSource<Inspection>(inspections);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 

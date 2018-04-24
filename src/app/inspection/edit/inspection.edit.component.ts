@@ -6,6 +6,7 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Inspection } from '../Inspection';
 import { InspectionService } from '../inspection.service';
+import { LoaderService } from '../../loader/loader.service';
 
 import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
@@ -62,6 +63,7 @@ export class InspectionEditComponent implements OnInit {
     private router: Router,
     private service: InspectionService,
     private snackBar: MatSnackBar,
+    private loader: LoaderService,
   ) { }
 
   public ngOnInit() {
@@ -72,6 +74,8 @@ export class InspectionEditComponent implements OnInit {
   }
 
   public getOptionsForEdit() {
+    this.loader.show();
+
     this.service.getOptionsForEdit(this.inspectionId).subscribe((results) => {
       const inspection: any = results[0];
       const inspectionResults: any = results[1];
@@ -99,6 +103,10 @@ export class InspectionEditComponent implements OnInit {
       this.inspection = inspection;
       this.inspectionResultsList = inspectionResults.map((result) => result.id);
       this.progressList = degreeProgress.map((degree) => degree.description);
+
+      setTimeout(() => {
+        this.loader.hide();
+      }, 512);
     });
   }
 
@@ -129,6 +137,7 @@ export class InspectionEditComponent implements OnInit {
 
     const inspection = { ...this.inspection, ...changedParams };
 
+    this.loader.show();
     this.service
       .updateInspection(this.inspectionId, inspection)
       .subscribe((res: Inspection) => {
@@ -136,10 +145,18 @@ export class InspectionEditComponent implements OnInit {
           duration: 2000,
         });
 
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
+
         // Navigate to inspections list
         this.router.navigate(['inspection/list']);
       }, (error) => {
         console.log('Error', error);
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
 
         this.snackBar.open('Error occurred unexpectedly', null, {
           duration: 1500,

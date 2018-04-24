@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Inspection } from '../Inspection';
 import { InspectionService } from '../inspection.service';
+import { LoaderService } from '../../loader/loader.service';
 
 import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
@@ -57,8 +57,12 @@ export class InspectionDetailsComponent implements OnInit {
   public geography: string = null;
   public unitSubsidiary: string = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private service: InspectionService) {
-  }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: InspectionService,
+    private loader: LoaderService,
+  ) {}
 
   public ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -68,6 +72,8 @@ export class InspectionDetailsComponent implements OnInit {
   }
 
   public getInspection() {
+    this.loader.show();
+
     this.service
       .getInspection(this.inspectionId)
       .subscribe((res: Inspection) => {
@@ -100,6 +106,10 @@ export class InspectionDetailsComponent implements OnInit {
         this.categoryCode = res.categoryCode;
         this.geography = res.geography;
         this.unitSubsidiary = res.unitSubsidiary;
+
+        setTimeout(() => {
+          this.loader.hide();
+        }, 512);
       });
   }
 }
